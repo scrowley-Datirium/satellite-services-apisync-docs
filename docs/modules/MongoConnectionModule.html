@@ -304,9 +304,6 @@
     <li  class="active" >
         <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
     </li>
-    <li >
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-    </li>
 </ul>
 
 <div class="tab-content">
@@ -398,51 +395,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
-import { MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
-
-import { CWLService } from &#x27;./cwl.service&#x27;;
-import { SamplesService } from &#x27;./samples.service&#x27;;
-import { SatelliteService } from &#x27;./satellite.service&#x27;;
-import { CWL, CWLSchema } from &#x27;./schemas/cwl.schema&#x27;;
-import { Sample, SampleSchema } from &#x27;./schemas/sample.schema&#x27;;
-import { Satellite, SatelliteSchema } from &#x27;./schemas/satellite.schema&#x27;;
-import { SubDomain, SubDomainSchema } from &#x27;./schemas/subdomain.schema&#x27;;
-import { TasksQueue, TasksQueueSchema } from &#x27;./schemas/task.schema&#x27;;
-import { ServiceTag, ServiceTagSchema } from &#x27;./schemas/serviceTag.schema&#x27;;
-import { TasksQueueService } from &#x27;./tasksQueue.service&#x27;;
-import { SubDomainService } from &#x27;./subDomain.service&#x27;;
-import { ApiSyncMachinesService } from &#x27;./apiSyncMachines.service&#x27;;
-import { ApiSyncMachine, ApiSyncMachineSchema } from &#x27;./schemas/apiSyncMachines.schema&#x27;;
-import { SatelliteMachine, SatelliteMachineSchema } from &#x27;./schemas/satelliteMachines.schema&#x27;;
-import { SatelliteMachineService } from &#x27;./satelliteMachines.service&#x27;;
-import { SatelliteTask, SatelliteTaskSchema } from &#x27;./schemas/satelliteTask.schema&#x27;;
-import { SatelliteTasksService } from &#x27;./satelliteTasks.service&#x27;;
-import { Lab, LabSchema } from &#x27;./schemas/lab.schema&#x27;;
-import { LabService } from &#x27;./labs.service&#x27;;
-
-@Module({
-    imports: [
-        MongooseModule.forFeature([
-            { name: TasksQueue.name, schema: TasksQueueSchema },
-            { name: Satellite.name, schema: SatelliteSchema },
-            { name: Sample.name, schema: SampleSchema },
-            { name: CWL.name, schema: CWLSchema },
-            { name: SubDomain.name, schema: SubDomainSchema },
-            { name: ServiceTag.name, schema: ServiceTagSchema },
-            { name: ApiSyncMachine.name, schema: ApiSyncMachineSchema },
-            { name: SatelliteMachine.name, schema: SatelliteMachineSchema },
-            { name: SatelliteTask.name, schema: SatelliteTaskSchema },
-            { name: Lab.name, schema: LabSchema },
-        ]),
-    ],
-    providers: [TasksQueueService, SamplesService, CWLService, SatelliteService, SubDomainService, ApiSyncMachinesService, SatelliteMachineService, SatelliteTasksService, LabService],
-    exports: [TasksQueueService, SamplesService, CWLService, SatelliteService, SubDomainService, ApiSyncMachinesService, SatelliteMachineService, SatelliteTasksService, LabService],
-})
-export class MongoConnectionModule {}
-</code></pre>
-    </div>
 </div>
 
 

@@ -47,9 +47,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -127,11 +124,6 @@
 <code>constructor(tasksQueueModel: <a href="../classes/TasksQueue.html" target="_self">Model&lt;TasksQueueDocument&gt;</a>, sampleService: <a href="../injectables/SamplesService.html" target="_self">SamplesService</a>, serviceTagModel: <a href="../classes/ServiceTag.html" target="_self">Model&lt;ServiceTagDocument&gt;</a>)</code>
                     </td>
                 </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/mongoConnection/tasksQueue.service.ts:12</a></div>
-                            </td>
-                        </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -216,12 +208,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">src/mongoConnection/tasksQueue.service.ts:63</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -310,12 +296,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="162"
-                            class="link-to-prism">src/mongoConnection/tasksQueue.service.ts:162</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -405,12 +385,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">src/mongoConnection/tasksQueue.service.ts:47</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -499,12 +473,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/mongoConnection/tasksQueue.service.ts:26</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -577,12 +545,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="152"
-                            class="link-to-prism">src/mongoConnection/tasksQueue.service.ts:152</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -648,12 +610,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="103"
-                            class="link-to-prism">src/mongoConnection/tasksQueue.service.ts:103</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -742,12 +698,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="127"
-                            class="link-to-prism">src/mongoConnection/tasksQueue.service.ts:127</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -869,180 +819,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forwardRef, Inject, Injectable } from &#x27;@nestjs/common&#x27;;
-import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
-import { Model } from &#x27;mongoose&#x27;;
-
-// import { updatedInfoTasksQueue } from &#x27;../interfaces&#x27;;
-import { TasksQueueDocument, TasksQueue } from &#x27;./schemas/task.schema&#x27;;
-import { SamplesService } from &#x27;./samples.service&#x27;;
-import Log from &#x27;../lib/logger&#x27;;
-import { ServiceTag, ServiceTagDocument } from &#x27;./schemas/serviceTag.schema&#x27;;
-
-@Injectable()
-export class TasksQueueService {
-    constructor(
-        @InjectModel(TasksQueue.name)
-        private tasksQueueModel: Model&lt;TasksQueueDocument&gt;,
-        @Inject(forwardRef(() &#x3D;&gt; SamplesService))
-        private sampleService: SamplesService,
-        @InjectModel(ServiceTag.name)
-        private serviceTagModel: Model&lt;ServiceTagDocument&gt;,
-    ) {}
-
-    /**
-     * Find all of the tasks for a given satellite
-     * @param satellite_id mongo id of the satellite
-     */
-    async getBySatId(satellite_id: string): Promise&lt;{ queue: TasksQueueDocument[]; priorityQueue: TasksQueueDocument[] }&gt; {
-        const priorityTag &#x3D; await this.serviceTagModel.findOne({ priority: true }).exec();
-        const tasks &#x3D; await this.tasksQueueModel.find({ satellite_id }).exec();
-        if (!priorityTag) return { queue: tasks, priorityQueue: [] };
-        return tasks.reduce(
-            (final, task) &#x3D;&gt; {
-                const service_tags &#x3D; task.payload.get(&#x27;service_tags&#x27;);
-                if (!service_tags) final.queue.push(task);
-                else if (task.payload.get(&#x27;service_tags&#x27;).includes(priorityTag._id)) final.priorityQueue.push(task);
-                else final.queue.push(task);
-                return final;
-            },
-            { queue: [], priorityQueue: [] },
-        );
-    }
-
-    /**
-     * Get task by id, must include matching satellite id
-     * @param task_id mongo id of task
-     * @param satellite_id mongo id of satellite
-     */
-    async getById(task_id: string, satellite_id: string): Promise&lt;TasksQueue&gt; {
-        try {
-            const task &#x3D; await this.tasksQueueModel.findById(task_id).exec();
-            if (!task) throw Error(&#x60;Task ${task_id} not found&#x60;);
-            if (task.satellite_id &#x3D;&#x3D;&#x3D; satellite_id) return task;
-            throw Error(&#x60;${satellite_id} attempted to access wrong task&#x60;);
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    /**
-     * Delete a task by id and satellite id
-     * @param _id mongo id of task
-     * @param satellite_id mongo id of satellite
-     */
-    async delete(_id: string, satellite_id: string): Promise&lt;void&gt; {
-        try {
-            const task &#x3D; await this.tasksQueueModel.findById(_id).exec();
-            if (!task) throw Error(&#x60;Task ${_id} not found&#x60;);
-            if (task.satellite_id !&#x3D;&#x3D; satellite_id) throw Error(&#x27;Attempted to access wrong task&#x27;);
-            const tasksBySat &#x3D; await this.tasksQueueModel.find({ satellite_id: task.satellite_id });
-            tasksBySat.forEach(async (t) &#x3D;&gt; {
-                if (t._id &#x3D;&#x3D;&#x3D; task._id) return;
-                if (t.date.created &lt; task.date.created) {
-                    console.log(&#x60;Task ${t.id} Earlier than ${task.id}&#x60;);
-                    return;
-                }
-                try {
-                    const sample &#x3D; await this.sampleService.getById(t.payload.get(&#x27;sample_id&#x27;));
-                    const visualPlugin &#x3D; { ...sample.preview.visualPlugins[0] };
-                    const num &#x3D; visualPlugin.progress.number - 1;
-                    if (!num) return;
-                    visualPlugin.progress &#x3D; {
-                        ...visualPlugin.progress,
-                        title: num &#x3D;&#x3D;&#x3D; 1 ? &#x27;Starting to Process&#x27; : &#x60;${num}${this.nth(num)} in Queue&#x60;,
-                        number: num,
-                    };
-                    Log.debug(&#x60;Updated queue location for ${sample._id} to ${num}&#x60;);
-                    this.sampleService.updatePreview(sample._id, visualPlugin);
-                } catch (err) {
-                    Log.error(&#x60;Error updating Queue Location for ${t.payload.get(&#x27;sample_id&#x27;)}: ${err}&#x60;);
-                }
-            });
-            await this.tasksQueueModel.deleteOne({ _id });
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    /**
-     * Update the progress of a given task
-     * @param task_id mongo id of task
-     * @param updatedInfo task info to update
-     */
-    // async update(task_id: string, updatedInfo: updatedInfoTasksQueue): Promise&lt;TasksQueue&gt; {
-    async update(task_id: string, updatedInfo: any): Promise&lt;TasksQueue&gt; {
-        const newUpdatedInfo &#x3D; { ...updatedInfo };
-        const task &#x3D; await this.tasksQueueModel.findById(task_id);
-        const updatedPayload &#x3D; new Map();
-        task.payload.forEach((value, key) &#x3D;&gt; {
-            updatedPayload.set(key, value);
-        });
-        if (newUpdatedInfo.payload) {
-            Object.keys(newUpdatedInfo.payload).forEach((key) &#x3D;&gt; {
-                updatedPayload.set(key, newUpdatedInfo.payload[key]);
-            });
-            newUpdatedInfo.payload &#x3D; updatedPayload;
-        }
-        return await this.tasksQueueModel.findByIdAndUpdate(task_id, { ...newUpdatedInfo }, { useFindAndModify: false }).exec();
-    }
-
-    /**
-     * Update Download Progress by Task ID and File ID
-     * @param taskId mongo id of task
-     * @param fileId id to find file to update
-     * @param status status of download
-     * @param progress 0 to 100 represents download progress
-     * @param satId mongo id of satellite
-     */
-    async updateDownloadProgress(taskId: string, fileId: string, status: string, progress: number, satId: string) {
-        try {
-            const task &#x3D; await this.getById(taskId, satId);
-            const downloads &#x3D; task.payload.get(&#x27;downloads&#x27;);
-            const download &#x3D; { ...downloads[fileId] };
-            if (status &#x3D;&#x3D;&#x3D; &#x27;finished&#x27;) {
-                download.downloaded &#x3D; true;
-            } else {
-                download.progress &#x3D; progress;
-            }
-            const toUpdate &#x3D; &#x60;payload.downloads.${fileId}&#x60;;
-            await this.tasksQueueModel.findByIdAndUpdate(taskId, { $set: { [toUpdate]: download } }, { useFindAndModify: false });
-
-            const preview &#x3D; {
-                state: status,
-                dagId: &#x27;&#x27;,
-                runId: task.payload.get(&#x27;sample_id&#x27;),
-                progress: progress,
-            };
-            await this.sampleService.updateProgress(preview);
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    private nth(n: number): string {
-        return [, &#x27;st&#x27;, &#x27;nd&#x27;, &#x27;rd&#x27;][(n / 10) % 10 ^ 1 &amp;&amp; n % 10] || &#x27;th&#x27;;
-    }
-
-    /**
-     * Finds a Task Queue Object by Sample Id and Satellite Id
-     * @param sampleId Id of sample to find task by
-     * @param satelliteId Satellite Id that task belongs to
-     * @returns A Task Queue Object
-     */
-    async findTaskBySampleId(sampleId: string, satelliteId: string): Promise&lt;TasksQueue&gt; {
-        try {
-            const task &#x3D; await this.tasksQueueModel.findOne({ satellite_id: satelliteId, &#x27;payload.sample_id&#x27;: sampleId }).exec();
-            if (!task) throw new Error(&#x60;No Task with sample: ${sampleId} for satellite: ${satelliteId}&#x60;);
-            return task;
-        } catch (err) {
-            throw err;
-        }
-    }
-}
-</code></pre>
-    </div>
 
 </div>
 

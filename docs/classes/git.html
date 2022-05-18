@@ -51,9 +51,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -142,11 +139,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/mongoConnection/schemas/cwl.schema.ts:45</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -177,11 +169,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/mongoConnection/schemas/cwl.schema.ts:33</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -212,11 +199,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/mongoConnection/schemas/cwl.schema.ts:36</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -247,11 +229,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/mongoConnection/schemas/cwl.schema.ts:39</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -282,11 +259,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/mongoConnection/schemas/cwl.schema.ts:42</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -302,99 +274,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
-import { Document } from &#x27;mongoose&#x27;;
-
-export type CWLDocument &#x3D; CWL &amp; Document;
-
-class Date {
-    @Prop()
-    modified: number;
-}
-
-class Description {
-    @Prop()
-    author: string;
-
-    @Prop()
-    description: string;
-
-    @Prop()
-    info: string;
-
-    @Prop()
-    label: string;
-
-    @Prop()
-    url: string;
-
-    @Prop()
-    version: string;
-}
-
-class git {
-    @Prop()
-    message: string;
-
-    @Prop()
-    path: string;
-
-    @Prop()
-    remote: string;
-
-    @Prop()
-    sha: string;
-
-    @Prop()
-    local_path: string;
-}
-
-class Metadata {
-    @Prop()
-    path: string;
-
-    @Prop()
-    source: string;
-}
-
-@Schema({ collection: &#x27;CWL&#x27; })
-export class CWL {
-    @Prop()
-    _id: string;
-
-    @Prop({ type: Date })
-    date: Date;
-
-    @Prop()
-    description: Description;
-
-    @Prop()
-    git: git;
-
-    @Prop()
-    metadata: Metadata[];
-
-    @Prop()
-    servicetags: string[];
-
-    @Prop()
-    tags: string[];
-
-    @Prop({ type: Object })
-    upstream: any;
-
-    @Prop({ type: Object })
-    source: {
-        json: string;
-        packed: string;
-        source: string;
-    };
-}
-
-export const CWLSchema &#x3D; SchemaFactory.createForClass(CWL);
-</code></pre>
-    </div>
 </div>
 
 

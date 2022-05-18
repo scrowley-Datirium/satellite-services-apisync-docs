@@ -44,9 +44,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -136,12 +133,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="363"
-                            class="link-to-prism">src/app.controller.ts:363</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -226,12 +217,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="326"
-                            class="link-to-prism">src/app.controller.ts:326</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -309,12 +294,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="299"
-                            class="link-to-prism">src/app.controller.ts:299</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -383,12 +362,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="349"
-                            class="link-to-prism">src/app.controller.ts:349</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -508,12 +481,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="287"
-                            class="link-to-prism">src/app.controller.ts:287</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -593,12 +560,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="135"
-                            class="link-to-prism">src/app.controller.ts:135</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -659,411 +620,6 @@
 </section>    </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, UseFilters, UseGuards } from &#x27;@nestjs/common&#x27;;
-import { GrpcStreamCall } from &#x27;@nestjs/microservices&#x27;;
-import { ConfigService } from &#x27;@nestjs/config&#x27;;
-import { HttpService } from &#x27;@nestjs/axios&#x27;;
-import { createWriteStream, rename, promises } from &#x27;fs&#x27;;
-import { catchError, filter, tap } from &#x27;rxjs/operators&#x27;;
-import { merge, of } from &#x27;rxjs&#x27;;
-const path &#x3D; require(&#x27;path&#x27;);
-const crypto &#x3D; require(&quot;crypto&quot;);
-const fs &#x3D; require(&#x27;fs&#x27;);
-
-import { AuthGuard } from &#x27;./app.guard&#x27;;
-import { AppService } from &#x27;./app.service&#x27;;
-import { ExceptionFilter } from &#x27;./rpc-connection.filter&#x27;;
-import { StateMachinesService } from &#x27;./stateMachines/stateMachines.service&#x27;;
-import { SatelliteService } from &#x27;./mongoConnection/satellite.service&#x27;;
-import { SubDomainService } from &#x27;./mongoConnection/subDomain.service&#x27;;
-import { ApiSyncMachinesService } from &#x27;./mongoConnection/apiSyncMachines.service&#x27;;
-
-import { MessageToSatellite, SatelliteConnection, SatelliteMessage, SatelliteOutput, SciDapDuplexStream } from &#x27;./interfaces&#x27;;
-import Log from &#x27;./lib/logger&#x27;;
-import { Metadata } from &#x27;grpc&#x27;;
-import { SatelliteMachineService } from &#x27;./mongoConnection/satelliteMachines.service&#x27;;
-import { SatelliteTasksService } from &#x27;./mongoConnection/satelliteTasks.service&#x27;;
-
-const fsPromises &#x3D; fs.promises;
-const pingTimer &#x3D; 30000; // Every 30s it will send a ping
-const pingKillTimer &#x3D; 60000; // If 1 minute goes by without a response it will close the connection
-
-@Controller()
-export class AppController {
-    // Stores Satellite Connections by Id
-
-    constructor(
-        private _appService: AppService,
-        private _stateMachineService: StateMachinesService,
-        private _satelliteService: SatelliteService,
-        private _subDomainService: SubDomainService,
-        private _httpService: HttpService,
-        private _configService: ConfigService,
-        private _apiSyncMachinesService: ApiSyncMachinesService,
-        private _satelliteMachineService: SatelliteMachineService,
-        private _satelliteTasksService: SatelliteTasksService,
-        ) {
-        // Create a state machine on API-Sync relevant to a Satellite
-        this._appService.createFSM.subscribe(async ({ config, options, transitions, satelliteId, callback }) &#x3D;&gt; {
-            if (!satelliteId) satelliteId &#x3D; &#x27;test_satellite&#x27;;
-            const { interpreted, logger } &#x3D; await this._appService.setupStateMachine(config, options, transitions, satelliteId);
-            this._appService.satConnections[satelliteId].stateMachines[config.id] &#x3D; { fsm: interpreted, logger };
-            if (callback) {
-                callback();
-            }
-        });
-
-        this._appService.removeFSM.subscribe(({ machine, satelliteId, callback }) &#x3D;&gt; {
-            if (!satelliteId) satelliteId &#x3D; &#x27;test_satellite&#x27;;
-            try {
-                delete this._appService.satConnections[satelliteId].stateMachines[machine];
-                if (callback) {
-                    callback(null);
-                }
-            } catch (err) {
-                const message &#x3D; &#x60;Error removing ${machine} from ${satelliteId}: ${err}&#x60;;
-                Log.error(message);
-                if (callback) {
-                    callback(message);
-                }
-            }
-        });
-
-        merge(this._appService.sendToSat$, this._stateMachineService.satStream$).pipe(
-            tap((m) &#x3D;&gt; Log.info(&#x60;Sending ${!!m.trees?.length ? &#x27;Trees&#x27; : &#x27;&#x27;} ${!!m.tasks?.length ? &#x27;Tasks&#x27; : &#x27;&#x27;} to ${m.satelliteid}&#x60;)),
-        ).subscribe((message) &#x3D;&gt; {
-            let { satelliteid, trees, tasks, commands } &#x3D; message;
-            if (!satelliteid) satelliteid &#x3D; &#x27;test_satellite&#x27;;
-            try {
-                this._appService.satConnections[satelliteid].stream.write({ tasks, trees, commands });
-            } catch (err) {
-                Log.error(&#x60;Failed to send message to ${satelliteid}: ${err}&#x60;);
-            }
-        });
-
-        merge(this._stateMachineService.sendEvent$, this._appService.sendToAPI)
-            .pipe(
-                tap(({ to, type, delay, satelliteId }) &#x3D;&gt; Log.info(&#x60;${satelliteId} is attempting to send ${type} to ${to} ${!delay ? &#x27;&#x27; : &#x60;with ${delay}ms delay&#x60;}&#x60;)),
-                filter(({ to, satelliteId }) &#x3D;&gt; Object.keys(this._appService.satConnections[satelliteId].stateMachines).includes(to)),
-            )
-            .subscribe(async ({ to, type, delay, satelliteId }) &#x3D;&gt; {
-                if (delay) {
-                    await new Promise((r) &#x3D;&gt; setTimeout(() &#x3D;&gt; r(true), delay));
-                    Log.info(&#x60;${satelliteId} is sending ${type} to ${to}&#x60;);
-                    this._appService.satConnections[satelliteId].stateMachines[to].fsm.send({ type });
-                } else {
-                    Log.info(&#x60;${satelliteId} is sending ${type} to ${to}&#x60;);
-                    this._appService.satConnections[satelliteId].stateMachines[to].fsm.send({ type });
-                }
-            });
-        
-        this._appService.triggerContext
-            .pipe(
-                tap(({ to, satelliteId, method }) &#x3D;&gt; Log.info(&#x60;${satelliteId} is attempting to trigger ${method} on ${to}&#x60;)),
-            )
-            .subscribe(async ({ to, satelliteId, method, callback, args }) &#x3D;&gt; {
-                const err: string &#x3D; await new Promise((resolve) &#x3D;&gt; {
-                    try {
-                        const func &#x3D; this._appService.satConnections[satelliteId].stateMachines[to].fsm.state.context[method];
-                        if (!func) throw new Error(&#x60;${method} not found&#x60;);
-                        func(args);
-                        resolve(null);
-                    } catch (err) {
-                        const msg &#x3D; &#x60;Error running ${method} on ${satelliteId}-${to}: ${err}&#x60;;
-                        resolve(msg);
-                    }
-                });
-                if (callback) {
-                    callback(err);
-                }
-            });
-
-        this._stateMachineService.storeValue$
-            .pipe(
-                tap(({ to, key, satelliteId }) &#x3D;&gt; Log.info(&#x60;${satelliteId} is attempting to store ${key} on ${to}&#x60;)),
-                filter(({ to, satelliteId }) &#x3D;&gt; Object.keys(this._appService.satConnections[satelliteId].stateMachines).includes(to)),
-            )
-            .subscribe(async ({ to, key, value, satelliteId }) &#x3D;&gt; {
-                Log.info(&#x60;${satelliteId} is storing ${key} on ${to}&#x60;);
-                this._appService.satConnections[satelliteId].stateMachines[to].fsm.state.context[key] &#x3D; value;
-            });
-
-    }
-
-    @UseGuards(AuthGuard) // Guards the route
-    @UseFilters(ExceptionFilter) // Throws exceptions when auth fails
-    @GrpcStreamCall(&#x27;APISyncService&#x27;, &#x27;StreamQueue&#x27;)
-    async streamQueue(requestStream: SciDapDuplexStream, metadata: Metadata) {
-        const jwt &#x3D; &lt;string&gt;requestStream.metadata.get(&#x27;jwt&#x27;)[0];
-        // const localIps &#x3D; &lt;string&gt;requestStream.metadata.get(&#x27;ips&#x27;)[0]; // Still need to be parsed
-        const satInformation &#x3D; await this._satelliteService.getByToken(jwt);
-        Log.info(&#x60;Connection to Satellite ${satInformation._id} Open&#x60;);
-
-        const publicIP &#x3D; requestStream.getPeer();
-        Log.info(&#x60;External IP address: ${publicIP}&#x60;);
-        // Log.info(&#x60;Local IPs ${JSON.parse(localIps)}&#x60;);
-        if (!await this._satelliteService.updateConnectedStatus(satInformation._id, true, publicIP)) {
-            requestStream.end();
-        }
-
-        // let key: string, cert: string;
-        // // if (process.env.API_ENV &#x3D;&#x3D;&#x3D; &#x27;local&#x27;) {
-        // //     const response &#x3D; await this._subDomainService.getDevInfo();
-        // //     const { certs } &#x3D; response;
-        // //     key &#x3D; await (await fsPromises.readFile(certs.key)).toString();
-        // //     cert &#x3D; await (await fsPromises.readFile(certs.cert)).toString();
-        // // } else 
-        // if (satInformation.absoluteUrlSettings.providedCerts) {
-        //     key &#x3D; satInformation.absoluteUrlSettings.key;
-        //     cert &#x3D; satInformation.absoluteUrlSettings.cert;
-        // } else {
-        //     // If we are working in our local environment we need test certs
-        //     let satId &#x3D; [&#x27;test&#x27;, &#x27;local&#x27;].includes(process.env.API_ENV) ? &#x27;test&#x27; : satInformation._id;
-        //     const response &#x3D; await this._subDomainService.getBySatId(satId);
-        //     const { certs } &#x3D; response;
-        //     const absKey &#x3D; path.join(this._configService.get(&#x27;cert_root&#x27;), certs.key);
-        //     const absCert &#x3D; path.join(this._configService.get(&#x27;cert_root&#x27;), certs.ca);
-        //     key &#x3D; await (await fsPromises.readFile(absKey)).toString();
-        //     cert &#x3D; await (await fsPromises.readFile(absCert)).toString();
-
-        //     if (process.env.API_ENV !&#x3D;&#x3D; &#x27;local&#x27;) {
-        //         this._httpService.post(&#x27;http://localhost:3001/digital-ocean-urls&#x27;, { sat_id: satId, local_ip: localIps }).subscribe((result) &#x3D;&gt; {
-
-        //         }, (err) &#x3D;&gt; {
-        //             console.error(err.message)
-        //         });
-        //         // await this._appService.handleIPs(JSON.parse(localIps), satInformation, response);
-        //     }
-        // }
-
-        const newConnection: SatelliteConnection &#x3D; {
-            stream: requestStream,
-            stateMachines: {  },
-            connected: true,
-            tasks: [],
-            priorityTasks: [],
-            maxTasks: 1,
-            satInformation,
-        };
-
-        requestStream.write({ keepalive: true });
-        // This starts the interval on which to send pings to the client
-        newConnection.keepAlivePingTimer &#x3D; setInterval(() &#x3D;&gt; {
-            Log.debug(&#x60;Ping Sent ${newConnection.satInformation._id}&#x60;);
-            requestStream.write({ keepalive: true });
-        }, pingTimer);
-        // This starts the timer that will check to see if we should end this connection
-        this.runKeepAliveTimer(newConnection);
-
-        // This is for testing, we can change the way all of this works
-        this._appService.satConnections[satInformation._id] &#x3D; newConnection;
-        Log.debug(&#x27;Getting Default Configs&#x27;);
-        const defaultConfig &#x3D; {
-            apiMachines: [],
-            satMachines: [],
-            satTasks: [],
-        };
-        try {
-            const configOverwrites &#x3D; satInformation.configOverwrites || [];
-            const apiMachines &#x3D; await this._apiSyncMachinesService.getInitialMachines();
-            const satMachines &#x3D; await this._satelliteMachineService.getInitialMachines();
-            const satTasks &#x3D; await this._satelliteTasksService.getInitialTasks();
-            defaultConfig.apiMachines &#x3D; this._mergeDefaultConfigWithCustom(apiMachines, configOverwrites);
-            defaultConfig.satMachines &#x3D; this._mergeDefaultConfigWithCustom(satMachines, configOverwrites);
-            defaultConfig.satTasks &#x3D; this._mergeDefaultConfigWithCustom(satTasks, configOverwrites);
-        } catch (err) {
-            Log.error(&#x60;Failed to get Default Configs: ${err}&#x60;);
-        }
-        Log.debug(&#x60;Amount of Default API-Machines: ${defaultConfig.apiMachines.length}, Sat-Machines: ${defaultConfig.satMachines.length}, Sat Tasks: ${defaultConfig.satTasks}&#x60;);
-        const specificConfig &#x3D; {
-            apiMachines: !!satInformation.apiMachines ? satInformation.apiMachines : [],
-            satMachines: !!satInformation.satMachines ? satInformation.satMachines : [],
-            satTasks: !!satInformation.satTasks ? satInformation.satTasks : [],
-
-        };
-        Log.debug(&#x60;Amount of Specific API-Machines: ${specificConfig.apiMachines.length}, Sat-Machines: ${specificConfig.satMachines.length}, Sat Tasks: ${specificConfig.satTasks}&#x60;);
-
-        const apiMachines &#x3D; [...defaultConfig.apiMachines, ...specificConfig.apiMachines];
-        let counter &#x3D; 0;
-        for (let machine of apiMachines) {
-            try {
-                await new Promise((resolve) &#x3D;&gt; {
-                    this._appService.createFSM.next({ ...machine, satelliteId: satInformation._id, callback: () &#x3D;&gt; resolve(true) });
-                });
-                Log.debug(&#x60;Successfully started ${machine.config?.id} on API&#x60;);
-                counter++;
-            } catch (err) {
-                Log.error(&#x60;Failed to start ${machine.config?.id}&#x60;);
-            }
-        }
-        Log.debug(&#x60;Successfully started ${counter} API-Machines&#x60;);
-
-        const trees &#x3D; [...defaultConfig.satMachines, ...specificConfig.satMachines];
-        const tasks &#x3D; [...defaultConfig.satTasks, ...specificConfig.satTasks];
-        requestStream.write({ tasks, trees, satelliteid: satInformation._id });
-
-        requestStream.on(&#x27;data&#x27;, (msg: SatelliteMessage) &#x3D;&gt; {
-            try {
-                if (msg.taskid &#x3D;&#x3D;&#x3D; &#x27;test&#x27;) {
-                    this._appService.satConnections[satInformation._id].receievedResponse &#x3D; true;
-                }
-                // The Senders all need a way to handle communication.
-                //  Potentially each service needs a matching machine on API Sync that handles their information
-                if (msg.sender &#x3D;&#x3D;&#x3D; &#x27;main_satellite&#x27;) {
-                    msg.messages.forEach((message) &#x3D;&gt; {
-                        this.processMessagesFromMainService(msg.target, message.action, message.body, newConnection);
-                    });
-                }
-                if (msg.keepalive) {
-                    this.runKeepAliveTimer(newConnection);
-                }
-
-            } catch (err) {
-                Log.error(&#x60;Failed to parse message from SATELLITE ID: ${err}&#x60;);
-                Log.error(&#x60;Message: ${msg}&#x60;);
-            }
-        });
-        requestStream.on(&#x27;end&#x27;, async () &#x3D;&gt; {
-            clearTimeout(newConnection.keepAliveTimer);
-            clearInterval(newConnection.keepAlivePingTimer);
-            const satId &#x3D; newConnection.satInformation._id;
-            try {
-                Log.info(&#x60;Closing connection to ${satId}&#x60;);
-                const timeToExpire &#x3D; newConnection.satInformation.absoluteUrlSettings.inactiveTimerMS;
-                const expiryDate &#x3D; await this._satelliteService.updateTime(satId, true, timeToExpire);
-                await this._satelliteService.updateConnectedStatus(satId, false);
-                Log.debug(&#x60;${satId} expires on ${expiryDate.toUTCString()}&#x60;);
-            } catch (err) {
-                Log.error(&#x60;Failed to update Expiry Time: ${err.message}&#x60;);
-            } finally {
-                delete this._appService.satConnections[satId];
-            }
-        })
-    }
-
-    /**
-     * This function runs a timer that if it isn&#x27;t called in that time it breaks the connection and restarts it
-     * @param satConnection Connection to the given satellite
-     */
-    runKeepAliveTimer(satConnection: SatelliteConnection) {
-        clearTimeout(satConnection.keepAliveTimer);
-        satConnection.keepAliveTimer &#x3D; setTimeout(() &#x3D;&gt; {
-            Log.info(&#x60;Did not recieve Keep Alive Ping from ${satConnection.satInformation._id}&#x60;);
-            clearInterval(satConnection.keepAlivePingTimer);
-            satConnection.stream.end();
-        }, pingKillTimer);
-    }
-    
-
-    @UseFilters(ExceptionFilter) // Throws exceptions when auth fails
-    @GrpcStreamCall(&#x27;APISyncService&#x27;, &#x27;FileStream&#x27;)
-    async fileUpload(requestStream, callback) {
-        const tempName &#x3D; crypto.randomBytes(20).toString(&#x27;hex&#x27;);
-        let fileName;
-        const tempPath &#x3D; path.join(__dirname, &#x27;/tmp/&#x27;);
-        const finalPath &#x3D; path.join(__dirname, &#x27;/final/&#x27;);
-        await promises.mkdir(tempPath, { recursive: true });
-        await promises.mkdir(finalPath, { recursive: true });
-        await promises.open(tempPath + tempName, &#x27;w&#x27;);
-        const writeStream &#x3D; createWriteStream(tempPath+ tempName);
-        requestStream.on(&#x27;data&#x27;, (msg) &#x3D;&gt; {
-            writeStream.write(msg.file);
-            if (msg.file_name &amp;&amp; !fileName) {
-                fileName &#x3D; msg.file_name
-            }
-        });
-
-        requestStream.on(&#x27;end&#x27;, (msg) &#x3D;&gt; {
-            console.log(&#x27;File Finished&#x27;);
-            callback(null, { type: &#x27;SERVER&#x27;, status: &#x27;SUCCESS&#x27; });
-            rename(tempPath + tempName, finalPath + fileName, () &#x3D;&gt; {
-                console.log(&#x27;Success&#x27;);
-            });
-        });
-    }
-
-    @UseFilters(ExceptionFilter) // Throws exceptions when auth fails
-    @GrpcStreamCall(&#x27;APISyncService&#x27;, &#x27;CommandStream&#x27;)
-    async commandStream(requestStream, callback) {
-        requestStream.on(&#x27;data&#x27;, (msg: SatelliteOutput) &#x3D;&gt; {
-            try {
-                this._appService.satConnections[msg.satellite].stateMachines[msg.targetmachine].fsm.state.context[msg.method](msg.output);
-            } catch (err) {
-                Log.error(&#x60;${msg.satellite} Failed to Send ${msg.method} message to ${msg.targetmachine}: ${err}&#x60;);
-                Log.debug(msg.output);
-            }
-        });
-
-        requestStream.on(&#x27;end&#x27;, (msg) &#x3D;&gt; {
-
-        });
-    }
-
-    /**
-     * Processes a single message from Satellite by sending it to a relevant State Machine
-     *  on API-Sync
-     * @param target Name of the service to send to
-     * @param action Name of the action to run
-     * @param message Arguments to send to the function
-     * @param satConnection Information about the Satellite Connection
-     */
-    processMessagesFromMainService(target: string, action: string, message: string, satConnection: SatelliteConnection) {
-        if (!satConnection.stateMachines[target]) {
-            Log.error(&#x60;No State Machine named ${target}, failed to send: ${action} - ${message}&#x60;);
-            return;
-        }
-        try {
-            // Locate the action in the machine
-            const upAction &#x3D; action.split(&#x27;.&#x27;).reduce((acum, curr) &#x3D;&gt; acum[curr], satConnection.stateMachines[target].fsm) as (arg: string) &#x3D;&gt; void;
-            upAction(message);
-        } catch (err) {
-            Log.error(&#x60;Failed to run ${action} in ${target}&#x60;);
-        }
-    }
-
-    private _mergeDefaultConfigWithCustom(machines: any[], customList: any[]): any[] {
-        const updated &#x3D; [];
-        machines.forEach((machine) &#x3D;&gt; {
-            const custom &#x3D; customList.find((i) &#x3D;&gt; i.id &#x3D;&#x3D;&#x3D; machine._id);
-            if (!custom) {
-                updated.push(machine);
-                return;
-            }
-            const keys &#x3D; Object.keys(custom).filter((k) &#x3D;&gt; ![&#x27;id&#x27;, &#x27;number&#x27;].includes(k));
-            keys.forEach((k) &#x3D;&gt; {
-                let accessor &#x3D; machine;
-                const list &#x3D; k.split(&#x27;-&#x27;);
-                const last &#x3D; list.pop();
-                list.forEach((i) &#x3D;&gt; {
-                    accessor &#x3D; accessor[i];
-                });
-                accessor[last] &#x3D; custom[k];
-            });
-            // We only expect number to be used with API-Sync Machines
-            if (!!custom.number) {
-                const name &#x3D; machine.config.id;
-                const number &#x3D; custom.number || 1;
-                for (let cnt &#x3D; 0; cnt &lt; number; cnt++) {
-                    const newMachine &#x3D; { ...machine };
-                    const newConfig &#x3D; {  ...newMachine.config  };
-                    const newContext &#x3D; { ...newConfig.context };
-                    const updatedName &#x3D; &#x60;${name}_${cnt}&#x60;;
-                    newContext.fsmName &#x3D; updatedName;
-                    newConfig.id &#x3D; updatedName;
-                    newConfig.context &#x3D; newContext;
-                    newMachine.config &#x3D; newConfig;
-                    updated.push(newMachine);
-                }
-            } else {
-                updated.push(machine);
-            }
-        });
-        return updated;
-    }
-}
-</code></pre>
-    </div>
 </div>
 
 

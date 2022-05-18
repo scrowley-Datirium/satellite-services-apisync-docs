@@ -54,9 +54,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -83,11 +80,6 @@
 </code>
                     </td>
                 </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/interfaces/apiSync.interface.ts:141</a></div>
-                            </td>
-                        </tr>
             </tbody>
         </table>
 </section>
@@ -95,180 +87,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Metadata } from &#x27;grpc&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
-import { StartOptions as PM2StartOptions } from &#x27;pm2/types&#x27;;
-import { Config, Options } from &#x27;../mongoConnection/schemas/apiSyncMachines.schema&#x27;;
-
-export interface APISyncService {
-    streamQueue(upstream: Observable&lt;SatelliteMessage&gt;, metadata: Metadata): Observable&lt;APISyncMessage&gt;;
-    commandStream(upstream: Observable&lt;SatelliteOutput&gt;): Observable&lt;APISyncComplete&gt;;
-    fileStream(upstream: Observable&lt;FileFromClient&gt;): Observable&lt;APISyncComplete&gt;;
-}
-
-export interface APISyncMessage {
-    taskId?: string;
-    satelliteid?: string;
-    tasks?: SatelliteTask[];
-    trees?: DependencyTree[];
-    commands?: ServiceCommand[];
-    keepalive?: boolean;
-}
-
-export interface DependencyTree {
-    children?: DependencyTree[];
-    options: CustomPm2StartOptions;
-    statemachine?: UnProcessedStateMachineOptions;
-    onlymachine?: boolean;
-    /** Target machine on API Sync */
-    apimachine?: string;
-    /** Method for stdout */
-    outresponse?: string;
-    /** Method for stderr maybe we don&#x27;t use this. Only set error to true */
-    errorresponse?: string;
-    busresponse?: string;
-}
-
-export interface UnProcessedStateMachineOptions {
-    states?: OptionTypes;
-    on?: { [key: string]: OnOptions };
-    guards?: { [key: string]: string };
-    actions?: { [key: string]: string };
-}
-
-export interface ProcessedTree {
-    name: string;
-    children: ProcessedTree[];
-    options: StartOptions;
-    stateMachine?: StateMachineOptions;
-    apimachine?: string;
-    outresponse?: string;
-    errorresponse?: string;
-    busresponse?: string;
-}
-
-export interface StateMachineOptions {
-    states?: OptionTypes &amp; { on?: OnOptions };
-    on?: { [key: string]: OnOptions };
-    guards?: { [key: string]: (ctx) &#x3D;&gt; void };
-    actions?: { [key: string]: (ctx) &#x3D;&gt; void };
-}
-
-interface OptionTypes {
-    [key: string]: StateOptions;
-}
-
-export interface StateOptions {
-    on?: {
-        [key: string]: OnOptions;
-    };
-    entry?: string[];
-    exit?: string[];
-    overwrite?: boolean;
-}
-
-interface OnOptions {
-    target?: string;
-    actions?: string[];
-    cond?: string;
-}
-export interface CustomPm2StartOptions extends StartOptions {
-    /** used for testing */
-    keepscript?: boolean;
-    /** Always use args as an array of strings instead of a string */
-    args?: string[];
-    /** Always use interpreter_args as an array of strings instead of a string */
-    interpreter_args?: string[];
-    /** Always use a number for max_memory_restart */
-    max_memory_restart?: number;
-    /** */
-    watch?: boolean;
-    /** We can&#x27;t set a variable field so if watch array is set we use it instead of watch */
-    watch_array?: string[];
-
-    /** 
-     * We can&#x27;t set a gRPC field to any so we need to stringify them on API sync 
-     * and parse them on the satellite */
-    cron?: string;
-    execute_command?: string;
-    write?: string;
-    source_map_support?: string;
-    disable_source_map_support?: string;
-}
-
-export interface StartOptions extends PM2StartOptions {
-    keepscript?: boolean;
-    namespace?: string;
-    autorestart?: boolean;
-}
-
-export interface SatelliteTask {
-    name: string;
-    apimachine: string;
-    target: string;
-    command?: string;
-    options?: CustomPm2StartOptions;
-    streamresponse?: boolean;
-    scriptstring?: string;
-    outresponse?: string;
-    errorresponse?: string;
-    savelogs?: boolean;
-}
-
-/* Satellite&#x27;s Response, Including which part of the Satellite the message
- * originated from, type will be how we process it */
-export interface SatelliteMessage {
-    taskid: string;
-    sender: string;
-    // type: string;
-    target: string;
-    messages?: { action: string; body: string; }[];
-    keepalive?: boolean;
-}
-
-// TODO: Come back to these
-export interface SatelliteOutput {
-    targetmachine: string;
-    satellite: string;
-    method: string;
-    output: string;
-    error?: boolean;
-}
-
-interface FileFromClient {
-    [key: string]: any;
-}
-interface APISyncComplete {
-    [key: string]: any;
-}
-
-export interface CreateAPIMachine {
-    config: Config;
-    commands?: MachineCommand[];
-    options: Options;
-    transitions?: {
-        [key: string]: string;
-    };
-    satelliteId: string;
-    callback?: () &#x3D;&gt; {};
-}
-
-export interface MachineCommand {
-    label: string;
-    target: string;
-    args?: string;
-    style?: string;
-}
-
-export interface ServiceCommand {
-    target: string;
-    command?: string;
-    stdin?: string[];
-    bus?: string;
-}
-</code></pre>
-    </div>
 </div>
 
 

@@ -54,9 +54,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -254,47 +251,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Interpreter } from &quot;xstate&quot;;
-
-import { SatelliteTask } from &quot;.&quot;;
-
-export interface ProcessedStateMachine {
-    interpreted: Interpreter&lt;any&gt;;
-    logger: any;
-}
-
-// export interface SendSatelliteTask {
-//     satelliteid: string;
-//     tasks: SatelliteTask[]; // Fix this
-// }
-
-export interface SendEvent {
-    /** id of stateMachine that should handle the event */
-    to: string;
-    /** type of event (eg: &#x27;event&#x27;, &#x27;&#x27;) */
-    type: string;
-    delay?: number;
-    /** satellite that stateMachine exists on */
-    satelliteId: string;
-}
-
-export interface TriggerContext {
-    to: string;
-    satelliteId: string;
-    method: string;
-    args?: any;
-    callback?: (err: string) &#x3D;&gt; void;
-}
-
-export interface StoreKey {
-    to: string;
-    satelliteId: string;
-    key: string;
-    value: any;
-}
-</code></pre>
-    </div>
 </div>
 
 

@@ -47,9 +47,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -107,11 +104,6 @@
 <code>constructor(subDomainModel: <a href="../classes/SubDomain.html" target="_self">Model&lt;SubDomainDocument&gt;</a>)</code>
                     </td>
                 </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/mongoConnection/subDomain.service.ts:8</a></div>
-                            </td>
-                        </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -172,12 +164,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/mongoConnection/subDomain.service.ts:18</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -245,12 +231,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/mongoConnection/subDomain.service.ts:29</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -271,49 +251,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
-import { Model } from &#x27;mongoose&#x27;;
-
-import { SubDomain, SubDomainDocument } from &#x27;./schemas/subdomain.schema&#x27;;
-
-@Injectable()
-export class SubDomainService {
-    constructor(
-        @InjectModel(SubDomain.name)
-        private subDomainModel: Model&lt;SubDomainDocument&gt;,
-    ) {}
-
-    /**
-     * Get a satellite by its token, if no subdomain is found, find an unused subdomain and assign it
-     * @param token unique JWT for satellite
-     */
-    async getBySatId(id: string): Promise&lt;SubDomain&gt; {
-        let subDomain &#x3D; await this.subDomainModel.findOne({ satellite_id: id }).exec();
-        if (!subDomain) {
-            subDomain &#x3D; await this.subDomainModel.findOneAndUpdate({ inUse: false }, { $set: { satellite_id: id, inUse: true } }, { useFindAndModify: false }).exec();
-        }
-        return subDomain;
-    }
-
-    /**
-     * Gets information for certs for development satellite
-     */
-    async getDevInfo(): Promise&lt;SubDomain&gt; {
-        return await this.subDomainModel.findOne({ satellite_id: &#x27;test&#x27; }).exec();
-    }
-
-    // async clearOldSatellite(satellite_id: string): Promise&lt;SubDomain&gt; {
-    //     try {
-    //         return this.subDomainModel.findOneAndUpdate({ satellite_id }, { $set: { satellite_id: &#x27;&#x27;, inUse: false } }, { useFindAndModify: false });
-    //     } catch (err) {
-    //         throw err;
-    //     }
-    // }
-}
-</code></pre>
-    </div>
 
 </div>
 

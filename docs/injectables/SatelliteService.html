@@ -47,9 +47,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -159,11 +156,6 @@
 <code>constructor(satelliteModel: <a href="../classes/Satellite.html" target="_self">Model&lt;SatelliteDocument&gt;</a>)</code>
                     </td>
                 </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/mongoConnection/satellite.service.ts:10</a></div>
-                            </td>
-                        </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -224,12 +216,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="56"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:56</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -304,12 +290,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:46</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -375,12 +355,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:30</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -453,12 +427,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="138"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:138</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -492,12 +460,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="168"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:168</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -602,12 +564,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="153"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:153</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -700,12 +656,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="86"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:86</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -792,12 +742,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="181"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:181</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -876,12 +820,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:17</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -959,12 +897,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="117"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:117</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -1069,12 +1001,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="72"
-                            class="link-to-prism">src/mongoConnection/satellite.service.ts:72</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -1176,11 +1102,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/mongoConnection/satellite.service.ts:13</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -1190,200 +1111,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
-import { Model } from &#x27;mongoose&#x27;;
-import { LocalFiles } from &#x27;../interfaces&#x27;;
-
-import { Satellite, SatelliteDocument } from &#x27;./schemas/satellite.schema&#x27;;
-import Log from &#x27;../lib/logger&#x27;;
-
-@Injectable()
-export class SatelliteService {
-    constructor(
-        @InjectModel(Satellite.name)
-        public satelliteModel: Model&lt;SatelliteDocument&gt;,
-    ) {}
-
-
-    public async updateOne(_id: string, updatedObject: any) {
-        try {
-            const sat &#x3D; await this.satelliteModel.updateOne({ _id }, { $set: updatedObject });
-            return { upserted: sat.nModified };
-        } catch (err) {
-            return { err };
-        }
-    }
-
-    /**
-     * Get a satellite by its token
-     * @param token unique JWT for satellite
-     */
-    async getByToken(token: string): Promise&lt;Satellite&gt; {
-        try {
-            const satellite &#x3D; await this.satelliteModel.findOne({ token });
-            if (!satellite.absoluteUrlSettings) {
-                const settings &#x3D; {
-                    origin: &#x27;automatic&#x27;,
-                    inactiveTimerMS: 14 * 24 * 60 * 60 * 1000,
-                };
-                return await this.satelliteModel.findByIdAndUpdate(satellite._id, { $set: { absoluteUrlSettings: settings } }, { new: true, useFindAndModify: false });
-            }
-            return satellite;
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    async getById(_id: string) {
-        return this.satelliteModel.findOne({ _id });
-    }
-
-    /**
-     * Check if the satellite exists and can establish a link
-     *  This is where we would check if satellite can connect
-     *  THis is used by the gRPC Guard
-     * @param token unique JWT for satellite
-     */
-    async canLink(token: string): Promise&lt;boolean&gt; {
-        try {
-            const satellite &#x3D; await this.satelliteModel.findOne({ token });
-            if (!satellite) throw Error(&#x60;Satellite not found token: ${token}&#x60;);
-            // TODO: Check all the other things you want to check
-            return true;
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    /**
-     * Update the version of satellite in DB to current
-     * @param _id of satellite
-     * @param version of satellite
-     */
-    async updateVersion(_id: string, version: string) {
-        try {
-            return this.satelliteModel.findOneAndUpdate({ _id }, { $set: { &#x27;public.version&#x27;: version } }, { useFindAndModify: false });
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    /**
-     * Update the version of satellite in DB to current
-     * @param _id of satellite
-     * @param version of satellite
-     * @deprecated This is old, we should be doing all of this from central server not other way
-     */
-    async updateLocalFiles(_id: string, localFiles: LocalFiles) {
-        try {
-            const sample &#x3D; await this.satelliteModel.findById(_id);
-            const remotes &#x3D; sample.public.remoteModules;
-            let updated &#x3D; false;
-            const updatedRemotes &#x3D; remotes.map((remote) &#x3D;&gt; {
-                const updatedRemote &#x3D; { ...remote };
-                if (updatedRemote.moduleId &#x3D;&#x3D;&#x3D; &#x27;localfiles&#x27;) {
-                    updatedRemote.path &#x3D; localFiles.collection[0].path;
-                    updated &#x3D; true;
-                }
-                return updatedRemote;
-            });
-            if (!updated) updatedRemotes.push({ moduleId: &#x27;localfiles&#x27;, path: localFiles.collection[0].path });
-
-            return this.satelliteModel.findOneAndUpdate(
-                { _id },
-                { $set: { &#x27;public.showLocalFiles&#x27;: localFiles.show, &#x27;public.remoteModules&#x27;: updatedRemotes } },
-                { useFindAndModify: false },
-            );
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    /**
-     * Updates the expiry_time_ms of a satellite to a time two weeks from now
-     * @param _id satellite Id
-     * @param disconnect boolean for if the satellite is disconnecting
-     * @param timeToExpire number time in MS till expiration
-     */
-    async updateTime(_id: string, disconnect: boolean, timeToExpire?: number) {
-        try {
-            let expiryDate &#x3D; Infinity;
-            if (disconnect) {
-                if (!!timeToExpire) {
-                    expiryDate &#x3D; new Date().getTime() + timeToExpire;
-                } else {
-                    const twoWeeksMS &#x3D; 14 * 24 * 60 * 60 * 1000;
-                    expiryDate &#x3D; new Date().getTime() + twoWeeksMS;
-                }
-            }
-            const doc &#x3D; await this.satelliteModel.findOneAndUpdate({ _id }, { $set: { &#x27;public.expiry_time_ms&#x27;: expiryDate } }, { useFindAndModify: false });
-            if (!doc) {
-                throw new Error(&#x27;Satellite Not Found&#x27;);
-            }
-            return new Date(expiryDate);
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    async getUnusedSatellites(): Promise&lt;Satellite[]&gt; {
-        try {
-            const timeMS &#x3D; new Date().getTime();
-            return await this.satelliteModel.find({ &#x27;public.expiry_time_ms&#x27;: { $lte: timeMS } }).exec();
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    /**
-     * 
-     * @param satId Id of Satellite to Update
-     * @param ips Local IP Address of Satellite (used to update Digital Ocean Record)
-     * @returns Updated Satellite
-     */
-    async updateIPs(satId: string, ips: string) {
-        try {
-            return this.satelliteModel.findOneAndUpdate({ _id: satId }, { $set: { &#x27;public.localip&#x27;: ips } }, { useFindAndModify: false });
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    /**
-     * Updates the Connected Status of a Satellite and also set&#x27;s the public IP address where it is conencting from
-     * @param satId Id of the Satellite
-     * @param connected Whether the Satellite is connected
-     * @param publicIP Public Facing IP Address of Satellite
-     * @returns 
-     */
-    async updateConnectedStatus(satId: string, connected: boolean, publicIP?: string): Promise&lt;boolean&gt; {
-        try {
-            if (publicIP) {
-                await this.satelliteModel.findByIdAndUpdate(satId, { $set: { &#x27;public.connected&#x27;: connected, &#x27;public.publicIp&#x27;: publicIP } }, { useFindAndModify: false });
-            }
-            await this.satelliteModel.findByIdAndUpdate(satId, { $set: { &#x27;public.connected&#x27;: connected } }, { useFindAndModify: false });
-            return true;
-        } catch (err) {
-            Log.error(&#x60;Failed to update connection status for ${satId}: ${err}&#x60;);
-            return false;
-        }
-    }
-
-    async updateNewAbsoluteUrl(satId: string, newUrl: string) {
-        try {
-            if (!newUrl.includes(&#x27;https://&#x27;)) {
-                newUrl &#x3D; &#x27;https://&#x27; + newUrl;
-            }
-            return this.satelliteModel.findByIdAndUpdate(satId, { $set: { &#x27;public.newAbsoluteUrl&#x27;: newUrl } }, { useFindAndModify: false });
-        } catch (err) {
-            throw err;
-        }
-    }
-}
-</code></pre>
-    </div>
 
 </div>
 

@@ -51,9 +51,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -139,11 +136,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/mongoConnection/schemas/serviceTag.schema.ts:9</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -174,11 +166,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/mongoConnection/schemas/serviceTag.schema.ts:12</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -209,11 +196,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/mongoConnection/schemas/serviceTag.schema.ts:15</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -244,11 +226,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/mongoConnection/schemas/serviceTag.schema.ts:18</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -264,30 +241,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
-import { Document } from &#x27;mongoose&#x27;;
-
-export type ServiceTagDocument &#x3D; ServiceTag &amp; Document;
-
-@Schema({ collection: &#x27;service_tags&#x27; })
-export class ServiceTag {
-    @Prop()
-    _id: string;
-
-    @Prop()
-    name: string;
-
-    @Prop()
-    order: string;
-
-    @Prop()
-    priority: boolean;
-}
-
-export const ServiceTagSchema &#x3D; SchemaFactory.createForClass(ServiceTag);
-</code></pre>
-    </div>
 </div>
 
 

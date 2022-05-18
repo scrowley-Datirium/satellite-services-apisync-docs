@@ -47,9 +47,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -143,11 +140,6 @@
 <code>constructor(_cwlService: <a href="../injectables/CWLService.html" target="_self">CWLService</a>, _sampleService: <a href="../injectables/SamplesService.html" target="_self">SamplesService</a>, _satelliteService: <a href="../injectables/SatelliteService.html" target="_self">SatelliteService</a>, _subDomainService: <a href="../injectables/SubDomainService.html" target="_self">SubDomainService</a>, _tasksQueueService: <a href="../injectables/TasksQueueService.html" target="_self">TasksQueueService</a>, _labService: <a href="../injectables/LabService.html" target="_self">LabService</a>, _httpService: HttpService, _configService: <a href="../classes/Config.html" target="_self">ConfigService</a>, _appService: <a href="../injectables/AppService.html" target="_self">AppService</a>)</code>
                     </td>
                 </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/stateMachines/stateMachines.service.ts:20</a></div>
-                            </td>
-                        </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -305,12 +297,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">src/stateMachines/stateMachines.service.ts:57</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -435,11 +421,6 @@
                         <i>Default value : </i><code>fs</code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/stateMachines/stateMachines.service.ts:46</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -461,11 +442,6 @@
                         <i>Default value : </i><code>fs.promises</code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/stateMachines/stateMachines.service.ts:47</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -487,11 +463,6 @@
                         <i>Default value : </i><code>path</code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/stateMachines/stateMachines.service.ts:45</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -513,11 +484,6 @@
                         <i>Default value : </i><code>new Subject&lt;any&gt;()</code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/stateMachines/stateMachines.service.ts:34</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -539,11 +505,6 @@
                         <i>Default value : </i><code>new Subject&lt;APISyncMessage&gt;()</code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/stateMachines/stateMachines.service.ts:37</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -565,11 +526,6 @@
                         <i>Default value : </i><code>new Subject&lt;SendEvent&gt;()</code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/stateMachines/stateMachines.service.ts:40</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -591,11 +547,6 @@
                         <i>Default value : </i><code>new Subject&lt;StoreKey&gt;()</code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/stateMachines/stateMachines.service.ts:43</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -605,204 +556,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forwardRef, Inject, Injectable } from &#x27;@nestjs/common&#x27;;
-import { HttpService } from &#x27;@nestjs/axios&#x27;;
-import { ConfigService } from &#x27;@nestjs/config&#x27;;
-import { Subject } from &#x27;rxjs&#x27;;
-import { CWLService } from &#x27;../mongoConnection/cwl.service&#x27;;
-import { createMachine, interpret, Interpreter } from &#x27;xstate&#x27;;
-const path &#x3D; require(&#x27;path&#x27;);
-import fs &#x3D; require(&#x27;fs&#x27;);
-
-import { ProcessedStateMachine, SendEvent, SatelliteTask, StoreKey, APISyncMessage, ServiceCommand } from &#x27;../interfaces&#x27;;
-import { stateLogger } from &#x27;../lib/logger&#x27;;
-import { SamplesService } from &#x27;../mongoConnection/samples.service&#x27;;
-import { SatelliteService } from &#x27;../mongoConnection/satellite.service&#x27;;
-import { SubDomainService } from &#x27;../mongoConnection/subDomain.service&#x27;;
-import { TasksQueueService } from &#x27;../mongoConnection/tasksQueue.service&#x27;;
-import { LabService } from &#x27;../mongoConnection/labs.service&#x27;;
-import { AppService } from &#x27;../app.service&#x27;;
-
-@Injectable()
-export class StateMachinesService {
-    constructor (
-        private _cwlService: CWLService,
-        private _sampleService: SamplesService,
-        private _satelliteService: SatelliteService,
-        private _subDomainService: SubDomainService,
-        private _tasksQueueService: TasksQueueService,
-        private _labService: LabService,
-        private _httpService: HttpService,
-        private _configService: ConfigService,
-        @Inject(forwardRef(() &#x3D;&gt; AppService))
-        private _appService: AppService,
-    ) {}
-    // Currently does nothing real
-    public dbStream$ &#x3D; new Subject&lt;any&gt;();
-
-    // Subject that sends tasks to the appropriate Satellite
-    public satStream$ &#x3D; new Subject&lt;APISyncMessage&gt;();
-
-    // Subject that sends messages to other State Machines relevant to the same satellite
-    public sendEvent$ &#x3D; new Subject&lt;SendEvent&gt;();
-
-    // Subject that stores a key value pair on a state machien
-    public storeValue$ &#x3D; new Subject&lt;StoreKey&gt;();
-
-    private _path &#x3D; path;
-    private _fs &#x3D; fs;
-    private _fsPromises &#x3D; fs.promises;
-
-    /**
-     * Create a State Machine and setup transitions for it
-     * @param config Contains config setup for State Machine
-     * @param options Contains Actions and Guards
-     * @param transitions Actions to perform on Transition States
-     * @param satelliteId Id of the relevant Satellite
-     * @returns Interpreted Finite State Machine and a specific Logger for this State Machine
-     */
-    public async createStateMachine(config: any, options: any, transitions: any, satelliteId: string): Promise&lt;ProcessedStateMachine&gt; {
-        const updatedOptions &#x3D; { ...options };
-        const updatedConfig &#x3D; { ...config };
-        const logger &#x3D; await stateLogger(config.id, satelliteId);
-        
-        const AsyncFunction &#x3D; Object.getPrototypeOf(async function(){}).constructor
-
-        // Update the config for any keys that are marked as functions
-        const updatedContext &#x3D; {};
-        if (config.context) {
-            Object.keys(config.context).forEach((k) &#x3D;&gt; {
-                const value &#x3D; config.context[k];
-                if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; value.includes(&#x27;func::&#x27;)) {
-                    updatedContext[k] &#x3D; (args) &#x3D;&gt; {
-                        try {
-                            const script &#x3D; value.replace(&#x27;func::&#x27;, &#x27;&#x27;);
-                            // Don&#x27;t require the target if sending to itself
-                            const send &#x3D; (type: string, target?: string | number, delay?: number) &#x3D;&gt; {
-                                let to: string;
-                                if (!target || typeof target &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
-                                    to &#x3D; config.id;
-                                    if (typeof target &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
-                                        delay &#x3D; target;
-                                    }
-                                } else {
-                                    to &#x3D; target;
-                                }
-                                this.sendEvent$.next({ to, type, delay, satelliteId });
-                            };
-                            const satTasks &#x3D; (tasks: SatelliteTask[]) &#x3D;&gt; this.satStream$.next({ satelliteid: satelliteId, tasks });
-                            const satCommands &#x3D; (commands: ServiceCommand[]) &#x3D;&gt; this.satStream$.next({ satelliteid: satelliteId, commands });
-                            // Don&#x27;t require the target if storing on itself
-                            const store &#x3D; (key: string, value: any, target?: string, func?: any) &#x3D;&gt; {
-                                let to &#x3D; target || config.id;
-                                this.storeValue$.next({ satelliteId, to, key, value })
-                            };
-                            const context &#x3D; (key: string) &#x3D;&gt; this._appService.satConnections[satelliteId].stateMachines[config.id].fsm.state.context[key];
-                            new AsyncFunction(&#x27;logger&#x27;, &#x27;satelliteId&#x27;, &#x27;args&#x27;, &#x27;send&#x27;, &#x27;satTasks&#x27;, &#x27;satCommands&#x27;, &#x27;store&#x27;, &#x27;context&#x27;, script).call(this, logger, satelliteId, args, send, satTasks, satCommands, store, context);
-                        } catch (err) {
-                            logger.error(&#x60;Failed to run context ${k}: ${err}&#x60;);
-                        }
-                    }
-                } else {
-                    updatedContext[k] &#x3D; value;
-                }
-
-            });
-        }
-
-        // Update the actions to allow the functions to run correctly
-        const updatedActions &#x3D; {};
-        if (updatedOptions.actions) {
-            const actions &#x3D; updatedOptions.actions;
-            Object.keys(actions).forEach(
-                (k) &#x3D;&gt; updatedActions[k] &#x3D; (ctx) &#x3D;&gt; {
-                        try {
-                            // Don&#x27;t require the target if sending to itself
-                            const send &#x3D; (type: string, target?: string | number, delay?: number) &#x3D;&gt; {
-                                let to: string;
-                                if (!target || typeof target &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
-                                    to &#x3D; config.id;
-                                    if (typeof target &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
-                                        delay &#x3D; target;
-                                    }
-                                } else {
-                                    to &#x3D; target;
-                                }
-                                this.sendEvent$.next({ to, type, delay, satelliteId });
-                            };
-                            new AsyncFunction(&#x27;ctx&#x27;, &#x27;logger&#x27;, &#x27;satelliteId&#x27;, &#x27;send&#x27;, actions[k]).call(this, ctx, logger, satelliteId, send);
-                        } catch (err) {
-                            logger.error(&#x60;Failed to run action ${k}: ${err}&#x60;);
-                        }
-                    }
-            );
-        }
-        
-        // Update teh guards to allow the functions to run correctly
-        const updatedGuards &#x3D; {};
-        if (updatedOptions.guards) {
-            const guards &#x3D; updatedOptions.guards;
-            Object.keys(guards).forEach(
-                (k) &#x3D;&gt;
-                    (updatedGuards[k] &#x3D; (ctx) &#x3D;&gt; {
-                        try {
-                            return new AsyncFunction(&#x27;ctx&#x27;, &#x27;logger&#x27;, &#x27;satelliteId&#x27;, guards[k]).call(this, ctx, logger, satelliteId);
-                        } catch (err) {
-                            logger.error(&#x60;Failed to run guard ${k}: ${err}&#x60;);
-                        }
-                    }),
-            );
-        }
-
-        updatedOptions.actions &#x3D; updatedActions;
-        updatedOptions.guards &#x3D; updatedGuards;
-        
-        updatedConfig.context &#x3D; updatedContext;
-
-        const machine &#x3D; createMachine(updatedConfig, updatedOptions);
-        const interpreted &#x3D; interpret(machine);
-
-        // Correctly Parse the functions for Transitions
-        const updatedTransitions &#x3D; {};
-        if (transitions) {
-            Object.keys(transitions).forEach(
-                (k) &#x3D;&gt;
-                    (updatedTransitions[k] &#x3D; (state) &#x3D;&gt; {
-                        try {
-                            new AsyncFunction(&#x27;state&#x27;, &#x27;logger&#x27;, &#x27;satelliteId&#x27;, transitions[k]).call(this, state, logger, satelliteId);
-                        } catch (err) {
-                            logger.error(&#x60;Failed to run transition ${k}: ${err}&#x60;);
-                        }
-                    }),
-            );
-        }
-
-        interpreted.start();
-
-        // Setup the Transitions for the StateMachine
-        interpreted.onTransition((state) &#x3D;&gt; {
-            logger.info(&#x60;Current State is ${state.value}&#x60;);
-            if (typeof state.value !&#x3D;&#x3D; &#x27;string&#x27;) {
-                logger.error(&#x60;Invalid state: ${state.value} - type ${typeof state.value}&#x60;);
-                return;
-            }
-            if (updatedTransitions[state.value]) {
-                try {
-                    updatedTransitions[state.value](state);
-                } catch (err) {
-                    logger.error(&#x60;Error with transition to ${state.value}: ${err}&#x60;);
-                }
-            } else {
-                logger.debug(&#x60;No custom action for ${state.value}&#x60;);
-            }
-        });
-
-        return { interpreted, logger };
-    }
-}
-</code></pre>
-    </div>
 
 </div>
 

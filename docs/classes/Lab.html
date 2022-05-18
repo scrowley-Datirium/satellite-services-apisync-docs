@@ -51,9 +51,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -157,11 +154,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:9</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -192,11 +184,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:15</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -227,11 +214,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:18</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -262,11 +244,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:21</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -297,11 +274,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:24</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -332,11 +304,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:12</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -367,11 +334,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:27</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -402,11 +364,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:30</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -437,11 +394,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:33</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -472,11 +424,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/mongoConnection/schemas/lab.schema.ts:36</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -492,48 +439,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
-import { Document } from &#x27;mongoose&#x27;;
-
-export type LabDocument &#x3D; Lab &amp; Document;
-
-@Schema({ collection: &#x27;labs&#x27; })
-export class Lab {
-    @Prop()
-    _id: string;
-
-    @Prop({ type: Object })
-    owner: any;
-
-    @Prop()
-    description: string;
-
-    @Prop({ type: Array })
-    members: any;
-
-    @Prop()
-    modified: number;
-
-    @Prop()
-    name: string;
-
-    @Prop({ type: Array })
-    pending: any;
-
-    @Prop()
-    satellite_id: string;
-
-    @Prop({ type: Array })
-    satelliteList: any;
-
-    @Prop({ type: Object })
-    statistics: any;
-}
-
-export const LabSchema &#x3D; SchemaFactory.createForClass(Lab);
-</code></pre>
-    </div>
 </div>
 
 

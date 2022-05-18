@@ -44,9 +44,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -151,12 +148,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="99"
-                            class="link-to-prism">src/satInterface/satInterface.controller.ts:99</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -251,12 +242,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/satInterface/satInterface.controller.ts:33</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -335,12 +320,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">src/satInterface/satInterface.controller.ts:21</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -389,12 +368,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="134"
-                            class="link-to-prism">src/satInterface/satInterface.controller.ts:134</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -489,12 +462,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="158"
-                            class="link-to-prism">src/satInterface/satInterface.controller.ts:158</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -605,12 +572,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="66"
-                            class="link-to-prism">src/satInterface/satInterface.controller.ts:66</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -737,12 +698,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="177"
-                            class="link-to-prism">src/satInterface/satInterface.controller.ts:177</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -847,199 +802,6 @@
 </section>    </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Delete, forwardRef, Get, HttpException, HttpStatus, Inject, Param, Post } from &quot;@nestjs/common&quot;;
-import { v4 as uuidv4 } from &#x27;uuid&#x27;;
-
-import { CreateAPIMachine, SatelliteTask, DependencyTree, SatelliteConnection, ServiceCommand } from &quot;../interfaces&quot;;
-import { AppService } from &quot;../app.service&quot;;
-import Log from &quot;../lib/logger&quot;;
-
-@Controller(&#x27;api-sync&#x27;)
-export class SatInterfaceController {
-
-    constructor(
-        @Inject(forwardRef(() &#x3D;&gt; AppService))
-        private _appService: AppService
-    ) {}
-
-    /**
-     * Gets all Current Satellite Connections, probably won&#x27;t use often
-     * @returns All Current Satellite Connections
-     */
-    @Get(&#x27;satellite-connections&#x27;)
-    getSatellites(): { [key: string]: SatelliteConnection } {
-        Log.info(&#x27;Getting all Satellite Connections&#x27;);
-        const satellites &#x3D; this._appService.satConnections;
-        return satellites;
-    }
-
-    /**
-     * Gets the Current Satellite Connection for a single Satellite
-     * @param id Id of Satellite
-     * @returns A Current Satellite Connection
-     */
-    @Get(&#x27;satellite-connections/:id&#x27;)
-    getSatelliteById(@Param(&#x27;id&#x27;) id: string) {
-        Log.info(&#x60;Getting Satellite Connection ${id}&#x60;);
-        if (!id) {
-            throw new HttpException(&#x27;No ID provided&#x27;, HttpStatus.BAD_REQUEST);
-        }
-        
-        const sat &#x3D; this._appService.satConnections[id];
-
-        if (!sat) {
-            throw new HttpException(&#x27;No Satellite Connection found for ID&#x27;, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        const { stateMachines, connected, tasks, priorityTasks, maxTasks } &#x3D; sat;
-        const machines &#x3D; [];
-        Object.keys(stateMachines).forEach((key) &#x3D;&gt; {
-            const machine &#x3D; stateMachines[key];
-            const uo &#x3D; {
-                name: key,
-                context: machine.fsm.state.context,
-                state: machine.fsm.state.value,
-            };
-            machines.push(uo);
-        });
-        return { stateMachines: machines, connected, tasks, priorityTasks, maxTasks };
-    }
-
-    /**
-     * Send a List of Tasks and Trees to a specific Satellite
-     * @param id Id of Satellite
-     * @param tasks Tasks to send to the Satellite
-     * @param trees Machines to build on the Satellite
-     * @returns A Task Id of the task sent
-     */
-    @Post(&#x27;sat-message/:id&#x27;)
-    sendTaskToSatellite(@Param(&#x27;id&#x27;) id: string, @Body(&#x27;tasks&#x27;) tasks: SatelliteTask[], @Body(&#x27;trees&#x27;) trees: DependencyTree[], @Body(&#x27;commands&#x27;) commands: ServiceCommand[]) {
-        tasks &#x3D; tasks || [];
-        trees &#x3D; trees || [];
-        commands &#x3D; commands || [];
-        Log.info(&#x60;Sending ${tasks.length} Tasks and ${trees.length} Trees and ${commands.length} Commands to ${id}&#x60;);
-        if (!id) {
-            throw new HttpException(&#x27;No ID provided&#x27;, HttpStatus.BAD_REQUEST);
-        }
-        
-        if (!tasks.length &amp;&amp; !trees.length &amp;&amp; !commands.length) {
-            throw new HttpException(&#x27;No Trees and No Tasks&#x27;, HttpStatus.BAD_REQUEST);
-        }
-
-        const sat &#x3D; this._appService.satConnections[id];
-        if (!sat) {
-            throw new HttpException(&#x27;No Satellite Connection found for ID&#x27;, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        
-        const taskId &#x3D; uuidv4();
-        this._appService.sendToSat$.next({ taskId, tasks, trees, commands, satelliteid: id });
-        Log.info(&#x60;Task ${taskId} sent to Satellite ${id}&#x60;);
-        return {
-            taskId,
-        };
-    }
-
-    /**
-     * Create a list of State Machines to make on the API for a satellite
-     * @param id Id of Satellite
-     * @param machines Machines to start on API for Satellite
-     * @returns A list of machines that are created on API
-     */
-    @Post(&#x27;api-machine/:id&#x27;)
-    async createAPIMachineForSatellite(@Param(&#x27;id&#x27;) id: string, @Body(&#x27;machines&#x27;) machines: CreateAPIMachine[]): Promise&lt;{ [key: string]: boolean }&gt; {
-        machines &#x3D; machines || [];
-        Log.info(&#x60;Sending ${machines.length} Machines to Connection for ${id}&#x60;);
-        if (!id) {
-            throw new HttpException(&#x27;No ID provided&#x27;, HttpStatus.BAD_REQUEST);
-        }
-        
-        if (!machines.length) {
-            throw new HttpException(&#x27;No Trees and No Tasks&#x27;, HttpStatus.BAD_REQUEST);
-        }
-
-        const sat &#x3D; this._appService.satConnections[id];
-        if (!sat) {
-            throw new HttpException(&#x27;No Satellite Connection found for ID&#x27;, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        const created: { [key: string]: boolean } &#x3D; {};
-        machines.forEach((machine) &#x3D;&gt; {
-            created[machine.config.id] &#x3D; false;
-            const callback &#x3D; () &#x3D;&gt; created[machine.config.id] &#x3D; true;
-            this._appService.createFSM.next({ ...machine, satelliteId: id, callback });
-        });
-        Log.info(&#x60;Attempting to start ${Object.keys(created).length} Machines&#x60;);
-        await new Promise((resolve) &#x3D;&gt; setTimeout(() &#x3D;&gt; resolve(true), 2000));
-        Log.info(&#x60;Successfully started ${Object.keys(created).filter((k) &#x3D;&gt; created[k]).length} Machines&#x60;);
-        return created;
-    }
-
-    /**
-     * Remove a machine from API-Sync by Satellite Id and Machine Name
-     * @param satId Satellite Id
-     * @param machineId Name of the Machine
-     * @returns Removed boolean and potentially err message
-     */
-    @Delete(&#x27;api-machine/:satid/:machineid&#x27;)
-    async removeAPIMachineForSatellite(@Param(&#x27;satid&#x27;) satId: string, @Param(&#x27;machineid&#x27;) machineId: string): Promise&lt;{removed: boolean; err?: string}&gt; {
-        Log.info(&#x60;Attempting to remove ${machineId} from ${satId}&#x60;);
-        const err: string &#x3D; await new Promise((resolve) &#x3D;&gt; {
-            this._appService.removeFSM.next({ satelliteId: satId, machine: machineId, callback: (msg) &#x3D;&gt; resolve(msg)});
-        });
-        if (err) {
-            return {
-                removed: false,
-                err
-            };
-        }
-        return {
-            removed: true
-        };
-    }
-
-    /**
-     * Send an event to a machine on API-Sync
-     * @param satId Satellite Id
-     * @param machineId Name of the Machine
-     * @param event Event to send
-     * @returns sent boolean and potentially err message
-     */
-    @Post(&#x27;api-machine/:satid/:machineid/event&#x27;)
-    sendEvent(@Param(&#x27;satid&#x27;) satId: string, @Param(&#x27;machineid&#x27;) machineId: string, @Body(&#x27;event&#x27;) event: string): { sent: boolean; err?: string } {
-        Log.info(&#x60;Attempting to send ${event} to ${machineId} on ${satId}&#x60;);
-        try {
-            this._appService.sendToAPI.next({ satelliteId: satId, to: machineId, type: event });
-        } catch (err) {
-            return { sent: false, err }
-        }
-        return { sent: true }
-    }
-
-    /**
-     * Trigger a method on a machine on API-Sync
-     * @param satId Satellite Id
-     * @param machineId Name of the Machine
-     * @param method Method to trigger
-     * @param args Optional Args for method
-     * @returns triggered boolean and potentially err message
-     */
-     @Post(&#x27;api-machine/:satid/:machineid/method&#x27;)
-     async triggerContext(@Param(&#x27;satid&#x27;) satId: string, @Param(&#x27;machineid&#x27;) machineId: string, @Body(&#x27;method&#x27;) method: string, @Body(&#x27;args&#x27;) args: any): Promise&lt;{ triggered: boolean; err?: string }&gt; {
-        Log.info(&#x60;Attempting to trigger ${method} on ${machineId} on ${satId}&#x60;);
-        try {
-            const err: string &#x3D; await new Promise((resolve) &#x3D;&gt; {
-                this._appService.triggerContext.next({ satelliteId: satId, to: machineId, method, args, callback: (i) &#x3D;&gt; resolve(i) });
-            });
-            if (err) {
-                return { triggered: false, err };
-            }
-            return { triggered: true };
-        } catch (err) {
-            return { triggered: false, err };
-        }
-    }
-}</code></pre>
-    </div>
 </div>
 
 

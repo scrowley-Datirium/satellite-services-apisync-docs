@@ -54,9 +54,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -176,126 +173,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
-import { Document } from &#x27;mongoose&#x27;;
-
-export type SatelliteDocument &#x3D; Satellite &amp; Document;
-
-interface RemoteModule {
-    moduleId: string;
-    path: string;
-}
-class PublicInformation {
-    @Prop()
-    publicData: boolean;
-
-    @Prop()
-    connected: boolean;
-
-    @Prop()
-    domain: string;
-
-    @Prop()
-    common_project_id: string;
-
-    @Prop({ type: Object })
-    remoteModules: RemoteModule[];
-
-    @Prop()
-    absoluteUrl: string;
-
-    @Prop()
-    localip: string;
-
-    @Prop()
-    port: string;
-
-    @Prop()
-    version?: string;
-
-    @Prop()
-    newAbsoluteUrl?: string;
-
-    @Prop()
-    expiry_time_ms: number;
-
-    @Prop()
-    ownerProvidedUrl?: string;
-
-    @Prop()
-    maxSimultaneousTasks?: number;
-
-    @Prop()
-    publicIp?: string;
-}
-
-class AbsoluteUrlSettings {
-    @Prop()
-    origin: string; // automatic, fixed, owner
-
-    @Prop()
-    inactiveTimerMS: number; // Time in MS before Satellite gets unassigned
-
-    @Prop()
-    providedCerts?: boolean; // Does the owner provide their own certs
-
-    @Prop()
-    key?: string;
-
-    @Prop()
-    cert?: string;
-
-    @Prop()
-    fixedIp?: boolean;
-}
-
-
-@Schema({ collection: &#x27;satellites&#x27; })
-export class Satellite {
-    @Prop()
-    _id: string;
-
-    @Prop()
-    labId: string;
-
-    @Prop()
-    type: string;
-
-    @Prop({ type: Object })
-    public: PublicInformation;
-
-    @Prop()
-    token: string;
-
-    @Prop({ type: Object })
-    auth: any;
-
-    @Prop({ type: Object })
-    sync: any;
-
-    @Prop({ type: Object })
-    absoluteUrlSettings: AbsoluteUrlSettings;
-
-    @Prop({ type: Object })
-    satMachines: any;
-
-    @Prop({ type: Object })
-    satTasks: any;
-
-    @Prop({ type: Object })
-    apiMachines: any;
-
-    @Prop()
-    scidapHome: string;
-
-    @Prop({ type: Array })
-    configOverwrites: any[];
-}
-
-export const SatelliteSchema &#x3D; SchemaFactory.createForClass(Satellite);
-</code></pre>
-    </div>
 </div>
 
 

@@ -51,9 +51,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -140,11 +137,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/mongoConnection/schemas/satelliteMachines.schema.ts:11</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -176,11 +168,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/mongoConnection/schemas/satelliteMachines.schema.ts:14</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -212,11 +199,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/mongoConnection/schemas/satelliteMachines.schema.ts:8</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -232,82 +214,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
-import { Document } from &#x27;mongoose&#x27;;
-
-export type SatelliteMachineDocument &#x3D; SatelliteMachine &amp; Document;
-
-class OnOptions {
-    @Prop()
-    target?: string;
-
-    @Prop()
-    actions?: string[];
-
-    @Prop()
-    cond?: string;
-}
-
-class StateOptions {
-    @Prop()
-    entry: string[];
-
-    @Prop()
-    exit: string[];
-
-    @Prop({type: Object, of: OnOptions})
-    on: {
-        [key: string]: OnOptions;
-    }
-}
-
-class UnProcessedStateMachine {
-    @Prop({ type: Object, of: StateOptions })
-    states?: {
-        [key: string]: StateOptions;
-    }
-
-    @Prop({ type: Object, of: OnOptions })
-    on?: {
-        [key: string]: OnOptions;
-    }
-
-    @Prop({ type: Object, of: String })
-    guards?: {
-        [key: string]: string;
-    }
-
-    @Prop({ type: Object, of: String })
-    actions?: {
-        [key: string]: string;
-    }
-}
-
-@Schema({ collection: &#x27;satellite_machines&#x27;, minimize: false })
-export class SatelliteMachine {
-    @Prop()
-    _id: string;
-
-    @Prop()
-    inUse: boolean;
-
-    @Prop()
-    children?: SatelliteMachine[];
-
-    @Prop({ type: Object })
-    options?: any;
-    
-    @Prop()
-    statemachine?: UnProcessedStateMachine;
-
-    @Prop()
-    onlymachine?: boolean;
-}
-
-export const SatelliteMachineSchema &#x3D; SchemaFactory.createForClass(SatelliteMachine);
-</code></pre>
-    </div>
 </div>
 
 

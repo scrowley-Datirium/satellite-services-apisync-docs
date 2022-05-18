@@ -128,9 +128,6 @@
     <li  class="active" >
         <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
     </li>
-    <li >
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-    </li>
 </ul>
 
 <div class="tab-content">
@@ -192,46 +189,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forwardRef, Module } from &#x27;@nestjs/common&#x27;;
-import { HttpModule } from &#x27;@nestjs/axios&#x27;;
-import { ConfigService, ConfigModule } from &#x27;@nestjs/config&#x27;;
-import { MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
-import { ScheduleModule } from &#x27;@nestjs/schedule&#x27;;
-
-import { AppController } from &#x27;./app.controller&#x27;;
-import { AppService } from &#x27;./app.service&#x27;;
-import { SatInterfaceModule } from &#x27;./satInterface/satInterface.module&#x27;;
-import { StateMachineModules } from &#x27;./stateMachines/stateMachines.module&#x27;;
-import { MongoConnectionModule } from &#x27;./mongoConnection/mongoConnection.module&#x27;;
-import configuration from &#x27;../configuration&#x27;;
-
-@Module({
-    imports: [
-        forwardRef(() &#x3D;&gt; StateMachineModules),
-        forwardRef(() &#x3D;&gt; SatInterfaceModule),
-        ScheduleModule.forRoot(),
-        ConfigModule.forRoot({
-            isGlobal: true,
-            load: [configuration],
-        }),
-        MongooseModule.forRootAsync({
-            imports: [ConfigModule],
-            useFactory: async (configService: ConfigService) &#x3D;&gt; ({
-                uri: configService.get(&#x27;mongoDB_URI&#x27;),
-            }),
-            inject: [ConfigService],
-        }),
-        MongoConnectionModule,
-        HttpModule,
-    ],
-    controllers: [AppController],
-    providers: [AppService],
-    exports: [AppService],
-})
-export class AppModule {}
-</code></pre>
-    </div>
 </div>
 
 

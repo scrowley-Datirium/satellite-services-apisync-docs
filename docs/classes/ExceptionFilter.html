@@ -51,9 +51,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -136,12 +133,6 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="10"
-                            class="link-to-prism">src/rpc-connection.filter.ts:10</a></div>
-                </td>
-            </tr>
 
 
             <tr>
@@ -208,24 +199,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ArgumentsHost, Catch, RpcExceptionFilter } from &#x27;@nestjs/common&#x27;;
-import { RpcException } from &#x27;@nestjs/microservices&#x27;;
-import { Observable, throwError } from &#x27;rxjs&#x27;;
-
-/**
- * Catchs RPC exceptions and throws the error correctly
- */
-@Catch(RpcException)
-export class ExceptionFilter implements RpcExceptionFilter&lt;RpcException&gt; {
-    catch(exception: RpcException, host: ArgumentsHost): Observable&lt;Error&gt; {
-        const streamConnection &#x3D; host.getArgs()[0];
-        streamConnection.emit(&#x27;error&#x27;, new Error(exception.message));
-        return throwError(exception.getError());
-    }
-}
-</code></pre>
-    </div>
 </div>
 
 

@@ -51,9 +51,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -133,11 +130,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/mongoConnection/schemas/task.schema.ts:11</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -168,11 +160,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/mongoConnection/schemas/task.schema.ts:8</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -188,41 +175,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
-import { Document } from &#x27;mongoose&#x27;;
-
-export type TasksQueueDocument &#x3D; TasksQueue &amp; Document;
-
-class Date {
-    @Prop()
-    modified: number;
-
-    @Prop()
-    created: number;
-}
-
-@Schema({ collection: &#x27;tasks_queue&#x27; })
-export class TasksQueue {
-    @Prop()
-    _id: string;
-
-    @Prop()
-    satellite_id: string;
-
-    @Prop()
-    action: string;
-
-    @Prop()
-    payload: Map&lt;string, any&gt;;
-
-    @Prop({ type: Date })
-    date: Date;
-}
-
-export const TasksQueueSchema &#x3D; SchemaFactory.createForClass(TasksQueue);
-</code></pre>
-    </div>
 </div>
 
 

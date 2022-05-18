@@ -54,9 +54,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -176,51 +173,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ClientDuplexStream, Metadata } from &quot;grpc&quot;;
-import { Satellite } from &quot;../mongoConnection/schemas/satellite.schema&quot;;
-import { Interpreter } from &quot;xstate&quot;;
-
-import { APISyncMessage, SatelliteMessage } from &quot;.&quot;;
-
-/**
- * representation of a satellites connection to the server
- */
-export interface SatelliteConnection {
-    connected: boolean;
-    stream: SciDapDuplexStream;
-    stateMachines: { [key: string]: APISyncStateMachineObject };
-    tasks: string[];
-    priorityTasks: string[];
-    maxTasks: number;
-    satInformation: Satellite;
-    keepAliveTimer?: NodeJS.Timeout;
-    keepAlivePingTimer?: NodeJS.Timeout;
-    /** used for testing */
-    receievedResponse?: boolean;
-}
-
-export interface APISyncStateMachineObject {
-    fsm: Interpreter&lt;any&gt;;
-    logger: any;
-}
-
-export interface SciDapDuplexStream extends ClientDuplexStream&lt;APISyncMessage, SatelliteMessage&gt; {
-    metadata: Metadata;
-}
-
-export interface MessageToSatellite extends APISyncMessage {
-    satelliteId: string;
-}
-
-export interface LocalFiles {
-    show: boolean;
-    collection: {
-        name: string;
-        path: string;
-    }[];
-}</code></pre>
-    </div>
 </div>
 
 

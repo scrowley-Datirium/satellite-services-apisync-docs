@@ -128,9 +128,6 @@
     <li  class="active" >
         <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
     </li>
-    <li >
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-    </li>
 </ul>
 
 <div class="tab-content">
@@ -183,26 +180,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpModule } from &#x27;@nestjs/axios&#x27;;
-import { forwardRef, Module } from &#x27;@nestjs/common&#x27;;
-
-import { AppModule } from &#x27;../app.module&#x27;;
-import { MongoConnectionModule } from &#x27;../mongoConnection/mongoConnection.module&#x27;;
-import { StateMachinesService } from &#x27;./stateMachines.service&#x27;;
-
-@Module({
-    imports: [
-        HttpModule,
-        MongoConnectionModule,
-        forwardRef(() &#x3D;&gt; AppModule),
-    ],
-    providers: [StateMachinesService],
-    exports: [StateMachinesService],
-})
-export class StateMachineModules {}
-</code></pre>
-    </div>
 </div>
 
 

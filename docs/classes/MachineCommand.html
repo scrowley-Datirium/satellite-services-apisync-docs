@@ -51,9 +51,6 @@
         <li class="active">
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
 </ul>
 
 <div class="tab-content">
@@ -142,11 +139,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/mongoConnection/schemas/apiSyncMachines.schema.ts:73</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -177,11 +169,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/mongoConnection/schemas/apiSyncMachines.schema.ts:70</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -213,11 +200,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/mongoConnection/schemas/apiSyncMachines.schema.ts:76</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -248,11 +230,6 @@
                         </code>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/mongoConnection/schemas/apiSyncMachines.schema.ts:67</a></div>
-                        </td>
-                    </tr>
 
 
         </tbody>
@@ -268,117 +245,6 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
-import { Document } from &#x27;mongoose&#x27;;
-
-export type ApiSyncMachineDocument &#x3D; ApiSyncMachine &amp; Document;
-
-class Type {
-    @Prop()
-    target?: string;
-
-    @Prop()
-    cond?: string;
-
-    @Prop()
-    actions?: string[];
-}
-
-class State {
-    @Prop()
-    entry?: string[];
-
-    @Prop()
-    exit?: string[];
-
-    @Prop({type: Object, of: Type})
-    on?: {
-        [key: string]: Type;
-    }
-}
-
-export class Config {
-    @Prop()
-    id: string;
-
-    @Prop()
-    initial: string;
-
-    @Prop({type: Object})
-    context: {
-        [key: string]: any;
-    };
-
-    @Prop({type: Object, of: State})
-    states: {
-        [key: string]: State;
-    }
-
-    @Prop({type: Object, of: Type})
-    on?: {
-        [key: string]: Type;
-    }
-}
-
-export class Options {
-    @Prop({type: Object, of: String})
-    actions?: {
-        [key: string]: string;
-    }
-
-    @Prop({type: Object, of: String})
-    guards?: {
-        [key: string]: string;
-    }
-}
-
-export class MachineCommand {
-    @Prop()
-    target: string;
-
-    @Prop()
-    label: string;
-
-    @Prop()
-    args?: string;
-
-    @Prop()
-    style?: string;
-}
-
-@Schema({ collection: &#x27;api_sync_machines&#x27;, minimize: false })
-export class ApiSyncMachine {
-    @Prop()
-    _id: string;
-
-    @Prop()
-    applyTo: string[];
-
-    @Prop()
-    inUse: boolean;
-
-    @Prop()
-    type: string;
-
-    @Prop()
-    commands?: MachineCommand[];
-
-    @Prop()
-    config: Config;
-    
-    @Prop()
-    options: Options;
-
-    @Prop({type: Object, of: String})
-    transitions: {
-        [key: string]: string;
-    };
-}
-
-export const ApiSyncMachineSchema &#x3D; SchemaFactory.createForClass(ApiSyncMachine);
-</code></pre>
-    </div>
 </div>
 
 
