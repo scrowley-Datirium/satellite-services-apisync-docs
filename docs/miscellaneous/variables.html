@@ -1,0 +1,669 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>server documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">server documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Miscellaneous</li>
+  <li>Variables</li>
+</ol>
+
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#ApiSyncMachineSchema" title="src/mongoConnection/schemas/apiSyncMachines.schema.ts" ><b>ApiSyncMachineSchema</b>&nbsp;&nbsp;&nbsp;(src/.../apiSyncMachines.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#crypto" title="src/app.controller.ts" ><b>crypto</b>&nbsp;&nbsp;&nbsp;(src/.../app.controller.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CWLSchema" title="src/mongoConnection/schemas/cwl.schema.ts" ><b>CWLSchema</b>&nbsp;&nbsp;&nbsp;(src/.../cwl.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fs" title="src/app.controller.ts" ><b>fs</b>&nbsp;&nbsp;&nbsp;(src/.../app.controller.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fs" title="src/app.service.ts" ><b>fs</b>&nbsp;&nbsp;&nbsp;(src/.../app.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fsPromises" title="src/app.controller.ts" ><b>fsPromises</b>&nbsp;&nbsp;&nbsp;(src/.../app.controller.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LabSchema" title="src/mongoConnection/schemas/lab.schema.ts" ><b>LabSchema</b>&nbsp;&nbsp;&nbsp;(src/.../lab.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#path" title="src/app.controller.ts" ><b>path</b>&nbsp;&nbsp;&nbsp;(src/.../app.controller.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#path" title="src/app.service.ts" ><b>path</b>&nbsp;&nbsp;&nbsp;(src/.../app.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#path" title="src/stateMachines/stateMachines.service.ts" ><b>path</b>&nbsp;&nbsp;&nbsp;(src/.../stateMachines.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pingKillTimer" title="src/app.controller.ts" ><b>pingKillTimer</b>&nbsp;&nbsp;&nbsp;(src/.../app.controller.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pingTimer" title="src/app.controller.ts" ><b>pingTimer</b>&nbsp;&nbsp;&nbsp;(src/.../app.controller.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SampleSchema" title="src/mongoConnection/schemas/sample.schema.ts" ><b>SampleSchema</b>&nbsp;&nbsp;&nbsp;(src/.../sample.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SatelliteMachineSchema" title="src/mongoConnection/schemas/satelliteMachines.schema.ts" ><b>SatelliteMachineSchema</b>&nbsp;&nbsp;&nbsp;(src/.../satelliteMachines.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SatelliteSchema" title="src/mongoConnection/schemas/satellite.schema.ts" ><b>SatelliteSchema</b>&nbsp;&nbsp;&nbsp;(src/.../satellite.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SatelliteTaskSchema" title="src/mongoConnection/schemas/satelliteTask.schema.ts" ><b>SatelliteTaskSchema</b>&nbsp;&nbsp;&nbsp;(src/.../satelliteTask.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ServiceTagSchema" title="src/mongoConnection/schemas/serviceTag.schema.ts" ><b>ServiceTagSchema</b>&nbsp;&nbsp;&nbsp;(src/.../serviceTag.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#stateLogger" title="src/lib/logger.ts" ><b>stateLogger</b>&nbsp;&nbsp;&nbsp;(src/.../logger.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SubDomainSchema" title="src/mongoConnection/schemas/subdomain.schema.ts" ><b>SubDomainSchema</b>&nbsp;&nbsp;&nbsp;(src/.../subdomain.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TasksQueueSchema" title="src/mongoConnection/schemas/task.schema.ts" ><b>TasksQueueSchema</b>&nbsp;&nbsp;&nbsp;(src/.../task.schema.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/mongoConnection/schemas/apiSyncMachines.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ApiSyncMachineSchema"></a>
+                    <span class="name">
+                        <span ><b>ApiSyncMachineSchema</b></span>
+                        <a href="#ApiSyncMachineSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(ApiSyncMachine)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app.controller.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="crypto"></a>
+                    <span class="name">
+                        <span ><b>crypto</b></span>
+                        <a href="#crypto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>require(&quot;crypto&quot;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fs"></a>
+                    <span class="name">
+                        <span ><b>fs</b></span>
+                        <a href="#fs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>require(&#x27;fs&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fsPromises"></a>
+                    <span class="name">
+                        <span ><b>fsPromises</b></span>
+                        <a href="#fsPromises"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>fs.promises</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="path"></a>
+                    <span class="name">
+                        <span ><b>path</b></span>
+                        <a href="#path"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>require(&#x27;path&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pingKillTimer"></a>
+                    <span class="name">
+                        <span ><b>pingKillTimer</b></span>
+                        <a href="#pingKillTimer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>60000</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pingTimer"></a>
+                    <span class="name">
+                        <span ><b>pingTimer</b></span>
+                        <a href="#pingTimer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>30000</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/cwl.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CWLSchema"></a>
+                    <span class="name">
+                        <span ><b>CWLSchema</b></span>
+                        <a href="#CWLSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(CWL)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app.service.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fs"></a>
+                    <span class="name">
+                        <span ><b>fs</b></span>
+                        <a href="#fs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>require(&#x27;fs&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="path"></a>
+                    <span class="name">
+                        <span ><b>path</b></span>
+                        <a href="#path"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>require(&#x27;path&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/lab.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LabSchema"></a>
+                    <span class="name">
+                        <span ><b>LabSchema</b></span>
+                        <a href="#LabSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Lab)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/stateMachines/stateMachines.service.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="path"></a>
+                    <span class="name">
+                        <span ><b>path</b></span>
+                        <a href="#path"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>require(&#x27;path&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/sample.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SampleSchema"></a>
+                    <span class="name">
+                        <span ><b>SampleSchema</b></span>
+                        <a href="#SampleSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Sample)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/satelliteMachines.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SatelliteMachineSchema"></a>
+                    <span class="name">
+                        <span ><b>SatelliteMachineSchema</b></span>
+                        <a href="#SatelliteMachineSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(SatelliteMachine)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/satellite.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SatelliteSchema"></a>
+                    <span class="name">
+                        <span ><b>SatelliteSchema</b></span>
+                        <a href="#SatelliteSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Satellite)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/satelliteTask.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SatelliteTaskSchema"></a>
+                    <span class="name">
+                        <span ><b>SatelliteTaskSchema</b></span>
+                        <a href="#SatelliteTaskSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(SatelliteTask)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/serviceTag.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ServiceTagSchema"></a>
+                    <span class="name">
+                        <span ><b>ServiceTagSchema</b></span>
+                        <a href="#ServiceTagSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(ServiceTag)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/lib/logger.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stateLogger"></a>
+                    <span class="name">
+                        <span ><b>stateLogger</b></span>
+                        <a href="#stateLogger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>async (name: string, satelliteId: string) &#x3D;&gt; {
+    const logDir &#x3D; resolve(__dirname, &#x27;../../satellite-logs&#x27;, satelliteId);
+    try {
+        await fsPromises.access(logDir);
+    } catch (err) {
+        await fsPromises.mkdir(logDir);
+    }
+
+    return bunyan.createLogger({
+        name: &#x60;${satelliteId} State Machine ${name}&#x60;,
+        streams:
+            process.env.API_ENV &#x3D;&#x3D;&#x3D; &#x27;test&#x27; &amp;&amp; !process.env.LOGS
+                ? []
+                : [
+                      {
+                          level: &#x27;info&#x27;,
+                          path: resolve(__dirname, logDir, &#x27;statemachine.log&#x27;),
+                      },
+                      {
+                          level: process.env.LOG_LEVEL ? process.env.LOG_LEVEL : &#x27;info&#x27;,
+                          stream: process.stdout,
+                      },
+                  ],
+    });
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/subdomain.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SubDomainSchema"></a>
+                    <span class="name">
+                        <span ><b>SubDomainSchema</b></span>
+                        <a href="#SubDomainSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(SubDomain)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/mongoConnection/schemas/task.schema.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TasksQueueSchema"></a>
+                    <span class="name">
+                        <span ><b>TasksQueueSchema</b></span>
+                        <a href="#TasksQueueSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(TasksQueue)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
