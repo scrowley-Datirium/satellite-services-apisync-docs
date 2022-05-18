@@ -183,6 +183,9 @@ import { Interpreter } from &quot;xstate&quot;;
 
 import { APISyncMessage, SatelliteMessage } from &quot;.&quot;;
 
+/**
+ * representation of a satellites connection to the server
+ */
 export interface SatelliteConnection {
     connected: boolean;
     stream: SciDapDuplexStream;
@@ -193,7 +196,7 @@ export interface SatelliteConnection {
     satInformation: Satellite;
     keepAliveTimer?: NodeJS.Timeout;
     keepAlivePingTimer?: NodeJS.Timeout;
-    // used for testing
+    /** used for testing */
     receievedResponse?: boolean;
 }
 

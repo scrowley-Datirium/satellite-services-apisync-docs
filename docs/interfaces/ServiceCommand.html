@@ -298,11 +298,11 @@ export interface DependencyTree {
     options: CustomPm2StartOptions;
     statemachine?: UnProcessedStateMachineOptions;
     onlymachine?: boolean;
-    // Target machine on API Sync
+    /** Target machine on API Sync */
     apimachine?: string;
-    // Method for stdout
+    /** Method for stdout */
     outresponse?: string;
-    // Method for stderr maybe we don&#x27;t use this. Only set error to true
+    /** Method for stderr maybe we don&#x27;t use this. Only set error to true */
     errorresponse?: string;
     busresponse?: string;
 }
@@ -351,22 +351,22 @@ interface OnOptions {
     cond?: string;
 }
 export interface CustomPm2StartOptions extends StartOptions {
-    // used for testing
+    /** used for testing */
     keepscript?: boolean;
-    // Always use args as an array of strings instead of a string
+    /** Always use args as an array of strings instead of a string */
     args?: string[];
-    // Always use interpreter_args as an array of strings instead of a string
+    /** Always use interpreter_args as an array of strings instead of a string */
     interpreter_args?: string[];
-    // Always use a number for max_memory_restart
+    /** Always use a number for max_memory_restart */
     max_memory_restart?: number;
-
-    // We can&#x27;t set a variable field so if watch array is set we use it
-    //  instead of watch
+    /** */
     watch?: boolean;
+    /** We can&#x27;t set a variable field so if watch array is set we use it instead of watch */
     watch_array?: string[];
 
-    // We can&#x27;t set a gRPC field to any so we need to stringify them on API sync
-    //  and parse them on the satellite
+    /** 
+     * We can&#x27;t set a gRPC field to any so we need to stringify them on API sync 
+     * and parse them on the satellite */
     cron?: string;
     execute_command?: string;
     write?: string;

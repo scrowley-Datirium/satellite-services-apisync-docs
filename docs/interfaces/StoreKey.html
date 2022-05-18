@@ -270,9 +270,12 @@ export interface ProcessedStateMachine {
 // }
 
 export interface SendEvent {
+    /** id of stateMachine that should handle the event */
     to: string;
+    /** type of event (eg: &#x27;event&#x27;, &#x27;&#x27;) */
     type: string;
     delay?: number;
+    /** satellite that stateMachine exists on */
     satelliteId: string;
 }
 

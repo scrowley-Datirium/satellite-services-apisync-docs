@@ -69,6 +69,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>representation of a satellites connection to the server</p>
+
+            </p>
 
 
         <section>
@@ -368,6 +375,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>used for testing</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -513,6 +526,9 @@ import { Interpreter } from &quot;xstate&quot;;
 
 import { APISyncMessage, SatelliteMessage } from &quot;.&quot;;
 
+/**
+ * representation of a satellites connection to the server
+ */
 export interface SatelliteConnection {
     connected: boolean;
     stream: SciDapDuplexStream;
@@ -523,7 +539,7 @@ export interface SatelliteConnection {
     satInformation: Satellite;
     keepAliveTimer?: NodeJS.Timeout;
     keepAlivePingTimer?: NodeJS.Timeout;
-    // used for testing
+    /** used for testing */
     receievedResponse?: boolean;
 }
 

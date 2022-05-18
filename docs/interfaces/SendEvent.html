@@ -188,6 +188,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>satellite that stateMachine exists on</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -221,6 +227,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>id of stateMachine that should handle the event</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -254,6 +266,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>type of event (eg: &#39;event&#39;, &#39;&#39;)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -276,9 +294,12 @@ export interface ProcessedStateMachine {
 // }
 
 export interface SendEvent {
+    /** id of stateMachine that should handle the event */
     to: string;
+    /** type of event (eg: &#x27;event&#x27;, &#x27;&#x27;) */
     type: string;
     delay?: number;
+    /** satellite that stateMachine exists on */
     satelliteId: string;
 }
 
