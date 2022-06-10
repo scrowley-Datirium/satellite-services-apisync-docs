@@ -63,6 +63,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Represents a document in the task_queue collection on mongo</p>
+
+            </p>
 
 
 
@@ -170,6 +177,13 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>represents what action is to be taken
+eg: new_sample, LOAD, READY, ...</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -200,6 +214,12 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>when the task was last modified (when there was last a transition into the state the task is currently in)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -230,6 +250,13 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>content of task. generally includes satelliteID
+Can also include download progress which api-sync uses to update the samples visual-plugins</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -260,6 +287,12 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>id of satellite this task is for</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>

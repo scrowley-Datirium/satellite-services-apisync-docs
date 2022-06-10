@@ -59,6 +59,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service for tasksQueue collection
+Confluence: <a href="https://datirium.atlassian.net/wiki/spaces/SDP/pages/1166082049/Mongo+docs#tasks_queue-collection">https://datirium.atlassian.net/wiki/spaces/SDP/pages/1166082049/Mongo+docs#tasks_queue-collection</a></p>
+
+            </p>
 
 
 
@@ -127,6 +135,10 @@
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Task queue service is initialized with available use of sample service
+This is because tasks in the task_queue relate to a task to be performed by the satellite on a sample
+The satellite has to know the sample&#39;s info, and so this service collects it for it&#39;s caller so that the satellite can receive it</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -135,6 +147,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -149,6 +162,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>used for querying task_queue collection</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>sampleService</td>
@@ -161,6 +178,8 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>serviceTagModel</td>
@@ -173,6 +192,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>used for getting the priority service tag</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -300,7 +323,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Finds a Task Queue Object by Sample Id and Satellite Id</p>
+                    <div class="io-description"><p>Finds a Task Queue Object by Sample Id and Satellite Id.
+Used because a satellite can have multiple tasks, and they are abstractly grouped by the sample those tasks are run for.</p>
 </div>
 
                     <div class="io-description">
@@ -312,7 +336,6 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
-                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -327,10 +350,6 @@
                                     </td>
 
 
-                                    <td>
-                                        <p>Id of sample to find task by</p>
-
-                                    </td>
                                 </tr>
                                 <tr>
                                     <td>satelliteId</td>
@@ -343,10 +362,6 @@
                                     </td>
 
 
-                                    <td>
-                                        <p>Satellite Id that task belongs to</p>
-
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -358,8 +373,7 @@
 
                     </div>
                     <div class="io-description">
-                        <p>A Task Queue Object</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -519,7 +533,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>TasksQueueDocument[], TasksQueueDocument[]}&gt;} object with 2 queue&#39;s. first is normal queue of tasks for satellite, second is priorityQueue</p>
+
                     </div>
                 </td>
             </tr>
@@ -549,6 +564,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>formats a number into a string including is postfix&#39;d identifier (eg, 1 -&gt; &quot;1st&quot;, 2 -&gt; &quot;2nd&quot;, ...)</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -672,7 +689,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>updated taskQueue document</p>
+
                     </div>
                 </td>
             </tr>
