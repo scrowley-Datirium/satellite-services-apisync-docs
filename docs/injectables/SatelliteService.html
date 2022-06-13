@@ -59,6 +59,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service handling api-sync&#39;s connection to the satellite collection</p>
+<p>Confluence: <a href="https://datirium.atlassian.net/wiki/spaces/SDP/pages/1166082049/Mongo+docs#satellites-collection">https://datirium.atlassian.net/wiki/spaces/SDP/pages/1166082049/Mongo+docs#satellites-collection</a></p>
+
+            </p>
 
 
 
@@ -220,9 +228,9 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Check if the satellite exists and can establish a link
- This is where we would check if satellite can connect
- THis is used by the gRPC Guard</p>
+                    <div class="io-description"><p>Check if the satellite exists and can establish a link.
+This is where we would check if satellite can connect with api-sync
+This method is used by the gRPC Guard for protecting access to certain endpoints</p>
 </div>
 
                     <div class="io-description">
@@ -294,6 +302,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Get satellite by id</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -431,9 +441,18 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Gets unused satellites.</p>
+<p>Unused is defined as: the satellite&#39;s expiry time (in public.expiry_time_ms) has passed. (expiryTime &lt; now)</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="../classes/Satellite.html" target="_self" >Promise&lt;Satellite[]&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>List of satelliteDocs that are expired</p>
 
                     </div>
                 </td>
@@ -568,6 +587,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Update the local ip on the satellite doc</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -660,7 +681,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Update the version of satellite in DB to current</p>
+                    <div class="io-description"><p>Update the local file module for the satellite</p>
 </div>
 
                     <div class="io-description">
@@ -704,6 +725,8 @@
 
 
                                     <td>
+                                        <p>of satellite</p>
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -746,6 +769,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Updates the satellites newAbsoluteUrl, which is the url actually used in order to send tasks, machines, or anything to the satellite.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -824,6 +849,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Update a satellite by id</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -834,6 +861,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -848,6 +876,8 @@
                                     </td>
 
 
+                                    <td>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>updatedObject</td>
@@ -860,6 +890,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>satelliteDoc to replace old satellite in DB</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
