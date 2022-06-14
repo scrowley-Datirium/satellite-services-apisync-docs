@@ -63,6 +63,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This class is used to represent a single event, and the state transition/actions that the event triggers</p>
+
+            </p>
 
 
 
@@ -138,6 +145,13 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>list of actions that this state is able to run</p>
+<p>generally not used as the target option for this event is used to trigger either and onExit event for this state, or and onEnter event for the next state.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -169,6 +183,13 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>condition required to pass in order for this event to trigger it&#39;s actions or transition to the target state</p>
+<p>Refers either to local actions (above) or the statemachines global actions</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -200,6 +221,12 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The target of a set of &#39;on&#39; options is what state this event causes the machine to transition to</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>

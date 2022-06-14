@@ -131,13 +131,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/SatInterfaceModule.html" data-type="entity-link" >SatInterfaceModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#controllers-links-module-SatInterfaceModule-55ec5b76d58264bde076012ab22262bf22392692a85aeb8cc588ea01b25f6403d2209528e96b4aec9be71b61dc50864448539e6df4d54b830297d0ac1fc11a11"' : 'data-target="#xs-controllers-links-module-SatInterfaceModule-55ec5b76d58264bde076012ab22262bf22392692a85aeb8cc588ea01b25f6403d2209528e96b4aec9be71b61dc50864448539e6df4d54b830297d0ac1fc11a11"' }>
+                                            'data-target="#controllers-links-module-SatInterfaceModule-1ea527d4e28e546ee01b1bf729cf9a5f3578e32044e3c007d0db4a880c293637f0d8d29e7f6d3172675b1b9d314efee4decb5ee35a46e808c01013078d4d462e"' : 'data-target="#xs-controllers-links-module-SatInterfaceModule-1ea527d4e28e546ee01b1bf729cf9a5f3578e32044e3c007d0db4a880c293637f0d8d29e7f6d3172675b1b9d314efee4decb5ee35a46e808c01013078d4d462e"' }>
                                             <span class="icon ion-md-swap"></span>
                                             <span>Controllers</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-SatInterfaceModule-55ec5b76d58264bde076012ab22262bf22392692a85aeb8cc588ea01b25f6403d2209528e96b4aec9be71b61dc50864448539e6df4d54b830297d0ac1fc11a11"' :
-                                            'id="xs-controllers-links-module-SatInterfaceModule-55ec5b76d58264bde076012ab22262bf22392692a85aeb8cc588ea01b25f6403d2209528e96b4aec9be71b61dc50864448539e6df4d54b830297d0ac1fc11a11"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-SatInterfaceModule-1ea527d4e28e546ee01b1bf729cf9a5f3578e32044e3c007d0db4a880c293637f0d8d29e7f6d3172675b1b9d314efee4decb5ee35a46e808c01013078d4d462e"' :
+                                            'id="xs-controllers-links-module-SatInterfaceModule-1ea527d4e28e546ee01b1bf729cf9a5f3578e32044e3c007d0db4a880c293637f0d8d29e7f6d3172675b1b9d314efee4decb5ee35a46e808c01013078d4d462e"' }>
                                             <li class="link">
                                                 <a href="controllers/SatInterfaceController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >SatInterfaceController</a>
                                             </li>
