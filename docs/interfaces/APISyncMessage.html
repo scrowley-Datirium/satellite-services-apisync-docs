@@ -71,6 +71,7 @@
             </p>
             <p class="comment">
                 <p>Interface representing a message from the servers api-sync to this satellite</p>
+<p>This interface is used by stateMachine service to create an observable subscription to track satellites task_queue state-machine</p>
 
             </p>
 
@@ -176,6 +177,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>list of commands to be given to satellite</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -298,7 +305,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>id of task in task_queue for the satellite (this msg is going to) to run</p>
+                                    <div class="io-description"><p>id of task for the satellite (this msg is going to) to run</p>
 </div>
                                 </td>
                             </tr>

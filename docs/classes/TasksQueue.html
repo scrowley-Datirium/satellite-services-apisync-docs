@@ -252,8 +252,9 @@ eg: new_sample, LOAD, READY, ...</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>content of task. generally includes satelliteID
-Can also include download progress which api-sync uses to update the samples visual-plugins</p>
+                    <div class="io-description"><p>content of task. generally includes sample id</p>
+<p>Can also include download progress which api-sync uses to update the samples visual-plugins</p>
+<p>Can also include download tasks before they are sent to the satellite. after being sent and registerd by the satellite main state-machine, tasks are removed from the payload</p>
 </div>
                 </td>
             </tr>
