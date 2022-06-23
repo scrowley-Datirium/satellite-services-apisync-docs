@@ -61,7 +61,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>expose api-sync endpoints</p>
+                <p>exposes api-sync endpoints.</p>
 
             </p>
 
@@ -144,6 +144,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This method is how api-sync implements each satellites config overwrites for any of it&#39;s state-machines</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -154,6 +156,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -168,6 +171,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>list of default state-machines for satellite to be given</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>customList</td>
@@ -180,6 +187,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>list of state-machines based entirely of off the overwrites in satellites doc</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -191,7 +202,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>final config for a state-machine with a satellites config-overwrites applied</p>
+
                     </div>
                 </td>
             </tr>

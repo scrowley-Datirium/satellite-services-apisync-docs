@@ -360,7 +360,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/StoreKey.html" data-type="entity-link" >StoreKey</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/TriggerContext.html" data-type="entity-link" class="deprecated-name">TriggerContext</a>
+                                <a href="interfaces/TriggerContext.html" data-type="entity-link" >TriggerContext</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/UnProcessedStateMachineOptions.html" data-type="entity-link" >UnProcessedStateMachineOptions</a>

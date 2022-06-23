@@ -66,6 +66,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>interface representing an unprocessed state-machine</p>
+<p>Used by app.server and controller for the creation of a processed machine</p>
+
+            </p>
 
 
         <section>
@@ -166,6 +174,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>callback function triggered after a state-machine is created based off of the other interface attributes (only triggered if existing)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -204,6 +218,14 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>list fo commands this state machine can run</p>
+<p>Commands are not xstate based, but an overwrite we use in order for the front-end to be able to give abstract commands directly to the statemachine.</p>
+<p>Commands don&#39;t trigger actions, but context functions.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -237,6 +259,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>configuration of satellite. include context, states, and events (on)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -270,6 +298,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>options for a satellite. include guards and actions</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -341,6 +375,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Transitions are how commands (which aren&#39;t xstate inherent) apply state transitions</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>

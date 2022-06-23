@@ -442,6 +442,12 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>subscription for creating a state-machine for api-sync</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -517,6 +523,13 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subscription to a message for api (from api-sync or satellite)</p>
+<p>This variable is defined by app.controller in it&#39;s constructor in order for api-sync to send info to api</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -538,6 +551,14 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>subscription to an apiSync message.</p>
+<p>This variable is defined by app.controller in it&#39;s constructor in order for api-sync to send a message to satellites</p>
+<p>This subscription is merged and piped with different streams depending on the context/payload of the message</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -559,6 +580,12 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>used in order for a satellite&#39;s state-machine to trigger a function on a different state-machine on the same satellite</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
