@@ -145,6 +145,9 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>This method is how api-sync implements each satellites config overwrites for any of it&#39;s state-machines</p>
+<p>-For each machine:</p>
+<p>-Check if there are overwrites for machine</p>
+<p>-Replace values for each overwrite key (addresses through machine recursively based on key split by &#39;-&#39;)</p>
 </div>
 
                     <div class="io-description">
@@ -172,7 +175,7 @@
 
 
                                     <td>
-                                        <p>list of default state-machines for satellite to be given</p>
+                                        <p>list of default state-machines for satellite to be given.</p>
 
                                     </td>
                                 </tr>
@@ -583,6 +586,18 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Uses @type {AuthGuard} to guard the route</p>
+<p>Uses @type {ExceptionFilter} to throw exception is auth fails</p>
+<p>-Gets jwt from satellites metadata</p>
+<p>-Get satellite Doc by jwt</p>
+<p>-Update connection status</p>
+<p>-Create @type {SatelliteConnection} with 1 max task. includes satellite info</p>
+<p>-Setup keep alive timer for satellite</p>
+<p>-Setup state-machines based on default configuration (in mongo)</p>
+<p>-Modify machines that have overwrites for them in satellite doc</p>
+<p>-Create (interpret) mconfigured machines</p>
+<p>-Setup request stream for processing messages from satellite</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
