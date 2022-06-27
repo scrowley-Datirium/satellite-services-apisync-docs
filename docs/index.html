@@ -54,7 +54,42 @@
 
 <h2 id="description">Description</h2>
 <p>Api-sync is an api service for handling satellite related requests from api and sending/getting to satellites.</p>
-<h2 id="installation">Installation</h2>
+<h3 id="environment-variables">Environment Variables</h3>
+<div><pre class="line-numbers"><code class="language-bash"># Whether to run in a testing environment or not
+TEST=true
+# What level of logs to show (defaults to info)
+LOG_LEVEL=debug
+# What is the environment (which settings file to load)
+API_ENV=local
+# This is the public key that is used to sign the tokens we cat it in the start script
+PUBLIC_KEY=same_public_key_that_is_used_by_api
+# SSL Certs for GRPC Connection
+SSL_CHAIN=/etc/letsencrypt/live/dev.scidap.com-0001/fullchain.pem
+SSL_KEY=/etc/letsencrypt/live/dev.scidap.com-0001/privkey.pem
+# Cert Locations used for satellite certs
+CERT_ROOT=/opt/worker-certificates</code></pre></div><h3 id="yaml-settings">Yaml Settings</h3>
+<div><pre class="line-numbers"><code class="language-yaml"># MongoDB URL
+mongoDB_URI: &#39;mongodb://127.0.0.1:27017/scidap&#39;
+# How we sign the JWTs
+jwtOptions:
+  sign:
+    algorithm: &#39;ES512&#39;
+    expiresIn: &#39;90d&#39;
+  verify:
+    algorithms:
+      - &#39;RS256&#39;
+# GRPC Connection port
+url: &#39;localhost:8081&#39;
+# Location of the proto file
+protoPath: &#39;./grpc/apiSyncConnection.proto&#39;
+# Digital Ocean API key, used to update the DNS records
+doAPIkey: &#39;&#39;
+# Not used in the new implementation, but also probably not needed
+mimeTypes: {
+  default: &#39;application/octet-stream&#39;
+}
+# URL that the api broadcasts for local communication
+apisync_port: 8082</code></pre></div><h2 id="installation">Installation</h2>
 <div><pre class="line-numbers"><code class="language-bash">$ npm install</code></pre></div><h2 id="running-the-app">Running the app</h2>
 <div><pre class="line-numbers"><code class="language-bash"># development
 $ npm run start
@@ -71,14 +106,8 @@ $ npm run test
 $ npm run test:e2e
 
 # test coverage
-$ npm run test:cov</code></pre></div><h2 id="support">Support</h2>
+$ npm run test:cov</code></pre></div><h2 id="nest-support">Nest Support</h2>
 <p>Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you&#39;d like to join them, please <a href="https://docs.nestjs.com/support">read more here</a>.</p>
-<h2 id="stay-in-touch">Stay in touch</h2>
-<ul>
-<li>Author - <a href="https://kamilmysliwiec.com">Kamil Myśliwiec</a></li>
-<li>Website - <a href="https://nestjs.com/">https://nestjs.com</a></li>
-<li>Twitter - <a href="https://twitter.com/nestframework">@nestframework</a></li>
-</ul>
 <h2 id="license">License</h2>
 <p>Nest is <a href="LICENSE">MIT licensed</a>.</p>
 
